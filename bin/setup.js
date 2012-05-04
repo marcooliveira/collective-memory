@@ -1,14 +1,20 @@
 /*jslint node:true*/
+
 var fs = require('fs'),
 	path = require('path'),
 	util = require('util'),
-	colors = require('colors'),
+	colors = require('colors'), // https://github.com/marak/colors.js
+	mkdirp = require('mkdirp'), // https://github.com/substack/node-mkdirp
 	i,
 	total,
 	red = '\033[31m',
 	blue = '\033[34m',
 	reset = '\033[0m',
-	tmp;
+	tmp,
+	parent_dir,
+	source,
+	destination,
+	type;
 
 colors.setTheme({
 	status: 'green',
@@ -31,9 +37,11 @@ console.log('\nCreating default dirs\n'.status);
 
 total = config.setup_dirs.length;
 for (i = 0; i < total; i = i + 1) {
-	tmp = path.resolve('.', config.setup_dirs[i]).field + ': ';
-	if (!path.existsSync(config.setup_symlinks[i].dst)) {
-		fs.mkdirSync(config.setup_dirs[i], 0744);
+	destination = path.resolve('.', config.setup_dirs[i]);
+	tmp = destination.field + ': ';
+
+	if (!path.existsSync(destination)) {
+		mkdirp.sync(destination, 0744);
 		console.log(tmp + 'OK'.blue);
 	} else {
 		console.log(tmp + 'Skipped'.warning);
@@ -46,9 +54,20 @@ console.log('\nGenerating symbolic links...\n'.status);
 
 total = config.setup_symlinks.length;
 for (i = 0; i < total; i = i + 1) {
-	tmp = config.setup_symlinks[i].title.field + ' (' + path.resolve('.', config.setup_symlinks[i].dst).note + '): ';
-	if (!path.existsSync(config.setup_symlinks[i].dst)) {
-		fs.symlinkSync(config.setup_symlinks[i].src, config.setup_symlinks[i].dst, config.setup_symlinks[i].type);
+
+	source = path.resolve('.', config.setup_symlinks[i].src);
+	destination = path.resolve('.', config.setup_symlinks[i].dst);
+	tmp = config.setup_symlinks[i].title.field + ' (' + destination.note + '): ';
+
+	console.log('checking for ' + destination.red);
+	if (!path.existsSync(destination)) {
+
+		parent_dir = destination.match(/.+\//);
+		if (!path.existsSync(parent_dir)) {
+			console.log('going to create: ' + parent_dir);
+			mkdirp.sync(parent_dir, 0744);
+		}
+		fs.symlinkSync(source, destination, type);
 		console.log(tmp + 'OK'.blue);
 	} else {
 		console.log(tmp + 'Skipped'.warning);
