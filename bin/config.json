@@ -84,6 +84,14 @@
 			"src": "../vendor/twitter/bootstrap/js.js",
 			"dst": "../web/js/twitter/bootstrap.js",
 			"type": "file"
+		},
+
+
+		{
+			"title": "Classify",
+			"src": "../vendor/Classify/dist/amd",
+			"dst": "../web/js/Classify/",
+			"type": "dir"
 		}
 	]
 }

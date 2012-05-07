@@ -10,3 +10,6 @@
 [submodule "vendor/crossroads.js"]
 	path = vendor/crossroads.js
 	url = git@github.com:millermedeiros/crossroads.js.git
+[submodule "vendor/Classify"]
+	path = vendor/Classify
+	url = git@github.com:TrinityJS/Classify.git
