@@ -33,10 +33,8 @@ function fileExists(filePath) {
 
 function isDirectory(dirPath) {
     try {
-		console.log(">>", dirPath, fs.statSync(dirPath));
 		return !!fs.statSync(dirPath).isDirectory();
     } catch (e) {
-		console.log(e);
 		return false;
     }
 }
@@ -73,16 +71,16 @@ for (i = 0; i < total; i = i + 1) {
 
 	source = path.resolve(__dirname, config.setup_symlinks[i].src);
 	destination = path.resolve(__dirname, config.setup_symlinks[i].dst);
-	console.log(destination);
+	type = config.setup_symlinks[i].type;
 	tmp = config.setup_symlinks[i].title.field + ' (' + destination.note + '): ';
 
 	console.log('checking for ' + destination.red);
-	if (!isDirectory(destination)) {
+	if (!fileExists(destination)) {
 
 		parent_dir = destination.match(/.+[\/\\]/);
-		if (!fileExists(parent_dir)) {
+		if (!isDirectory(parent_dir)) {
 			console.log('going to create: ' + parent_dir);
-			mkdirp.sync(parent_dir, 0744);
+			console.log(">>", mkdirp.sync(parent_dir, 0744));
 		}
 		fs.symlinkSync(source, destination, type);
 		console.log(tmp + 'OK'.blue);
