@@ -8,10 +8,13 @@
  * @author Marco Oliveira <marcooliveira@ua.pt>
  */
 define([
+	'classify/Class',
 	'jquery',
+	'doT',
 	'../Footer/FooterController',
-	'../Header/HeaderController'
-], function ($, FooterController, HeaderController) {
+	'../Header/HeaderController',
+	'text!templates/Application/layout.html'
+], function (Class, $, doT, FooterController, HeaderController, layoutTemplate) {
 
 	'use strict';
 
@@ -29,8 +32,10 @@ define([
 		initialize: function () {
 			this._bodyElement = $(document.body);
 
-			this._header = new HeaderController();
-			this._footer = new FooterController();
+			this._bodyElement.html(doT.compile(layoutTemplate)());
+
+			this._header = new HeaderController($('#header'));
+			this._footer = new FooterController($('#footer'));
 
 			this._readHash();
 		},

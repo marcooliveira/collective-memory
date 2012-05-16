@@ -6,7 +6,7 @@
  *
  * @author André Cruz <andremiguelcruz@msn.com>
  */
-define(['dependency1'], function (dependency1) {
+define(['classify/Class'], function (Class) {
 
 	'use strict';
 
@@ -16,7 +16,7 @@ define(['dependency1'], function (dependency1) {
          * Constructor.
          */
 		initialize: function (element) {
-			
+			console.log('header construct');
 		}
 	};
 

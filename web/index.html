@@ -14,17 +14,33 @@
 	<meta name="viewport" content="width=device-width">
 
 	<link rel="stylesheet" href="css/style.css">
+
+	<script type="text/javascript" src="vendor/requirejs/require.js"></script>
+
 </head>
 <body>
-<header>
+	<script type="text/javascript">
+		var config = {
+				environment: 'dev',
+				debug: true
+			},
+			requirejs_config = {
+				baseUrl: '{{ asset('bundles')|pregReplace('/\\?.*/', '') }}',
+				paths: {
+					'order': '{{ asset('vendor/requirejs-plugins/order')|pregReplace('/\\?.*/', '') }}',
+					'text': '{{ asset('vendor/requirejs-plugins/text')|pregReplace('/\\?.*/', '') }}',
+					'jquery': '{{ asset('vendor/jquery/jquery')|pregReplace('/\\?.*/', '') }}',
+					'twitter-bootstrap': '{{ asset('bundles/triworkskimdotcomcommon/twitter-bootstrap/js/bootstrap')|pregReplace('/\\?.*/', '') }}',
+					'amd-utils': '{{ asset('vendor/amd-utils')|pregReplace('/\\?.*/', '') }}',
+					'classify': '{{ asset('vendor/classify/strict')|pregReplace('/\\?.*/', '') }}',
+					'doT': '{{ asset('vendor/doT/doT')|pregReplace('/\\?.*/', '') }}'
+				},
+				priority: ['jquery'],
+				urlArgs: config.environment == 'dev' ? + new Date() : ''
+			}
+		;
 
-</header>
-<div role="main">
-
-</div>
-<footer>
-
-</footer>
-
+		requirejs.config(requirejs_config);
+	</script>
 </body>
 </html>
