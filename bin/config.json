@@ -1,7 +1,8 @@
 {
 	"setup_dirs": [
 		"../web/css",
-		"../web/vendor"
+		"../web/vendor",
+		"../web/vendor/requirejs"
 	],
 	"setup_symlinks": [
 		{
@@ -22,13 +23,6 @@
 			"dst": "../web/templates",
 			"type": "dir"
 		},
-		{
-			"title": "vendor dir",
-			"src": "../src/vendor",
-			"dst": "../web/vendor",
-			"type": "dir"
-		},
-
 
 
 		{
