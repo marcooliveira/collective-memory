@@ -34,14 +34,13 @@ define([
 			this._contentElement = $('#content');
 		},
 
-
 		/**
 		 *
 		 */
 		getElement: function () {
 			return this._element;
 		},
-		
+
 		/**
 		 *
 		 */
