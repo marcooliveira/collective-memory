@@ -50,27 +50,6 @@ define([
 		/**
 		 *
 		 */
-		getView: function () {
-			return this._view;
-		},
-
-		/**
-		 *
-		 */
-		getHeaderController: function () {
-			return this._headerController;
-		},
-
-		/**
-		 *
-		 */
-		getFooterController: function () {
-			return this._footerController;
-		},
-
-		/**
-		 *
-		 */
 		_readHash: function () {
 			// TODO: read hash and initialize the modules according to the routing
 		}
