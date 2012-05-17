@@ -14,10 +14,10 @@ define(['classify/Class'], function (Class) {
 	var FooterController = {
 
 		/**
-         * Constructor.
-         */
+		 * Constructor.
+		 */
 		initialize: function (element) {
-			console.log('footer construct');
+			console.log('footer construct', element);
 		}
 	};
 

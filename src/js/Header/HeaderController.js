@@ -14,10 +14,10 @@ define(['classify/Class'], function (Class) {
 	var HeaderController = {
 
 		/**
-         * Constructor.
-         */
+		 * Constructor.
+		 */
 		initialize: function (element) {
-			console.log('header construct');
+			console.log('header construct', element);
 		}
 	};
 

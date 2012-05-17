@@ -10,12 +10,11 @@
 define([
 	'classify/Class',
 	'jquery',
-	'doT',
 	'amd-utils/object/mixIn',
-	'../Footer/FooterController',
+	'./ApplicationView',
 	'../Header/HeaderController',
-	'text!templates/Application/layout.html'
-], function (Class, $, doT, mixIn, FooterController, HeaderController, layoutTemplate) {
+	'../Footer/FooterController',
+], function (Class, $, mixIn, ApplicationView, HeaderController, FooterController) {
 
 	'use strict';
 
@@ -26,26 +25,24 @@ define([
 			debug:        true
 		},
 
-		_bodyElement: null,
+		_headerController: null,
+		_footerController: null,
 
-		_header: null,
-		_footer: null,
-		_content: null,
+		_view: null,
+
 
 		/**
-         * Constructor.
-         * 
-         * @param {object} config An object
-         */
+		 * Constructor.
+		 *
+		 * @param {object} config An object
+		 */
 		initialize: function (config) {
 			mixIn(this._config, config);
 
-			this._bodyElement = $(document.body);
+			this._view = new ApplicationView($(document.body));
 
-			this._bodyElement.html(doT.compile(layoutTemplate)());
-
-			this._header = new HeaderController($('#header'));
-			this._footer = new FooterController($('#footer'));
+			this._headerController = new HeaderController(this._view.getHeader());
+			this._footerController = new FooterController(this._view.getFooter());
 
 			this._readHash();
 		},
@@ -53,10 +50,29 @@ define([
 		/**
 		 *
 		 */
+		getView: function () {
+			return this._view;
+		},
+
+		/**
+		 *
+		 */
+		getHeaderController: function () {
+			return this._headerController;
+		},
+
+		/**
+		 *
+		 */
+		getFooterController: function () {
+			return this._footerController;
+		},
+
+		/**
+		 *
+		 */
 		_readHash: function () {
 			// TODO: read hash and initialize the modules according to the routing
-
-
 		}
 	};
 
