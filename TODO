@@ -1,2 +1,3 @@
 - check for JSLint errors
 - read hash and initialize the modules according to the routing
+- think about implementing a base controller and a base view with common things like getView() and getElement() and events mixin
