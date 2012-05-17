@@ -25,15 +25,16 @@
 				debug: true
 			},
 			requirejs_config = {
-				baseUrl: '{{ asset('bundles')|pregReplace('/\\?.*/', '') }}',
+				baseUrl: 'js',
 				paths: {
-					'order': '{{ asset('vendor/requirejs-plugins/order')|pregReplace('/\\?.*/', '') }}',
-					'text': '{{ asset('vendor/requirejs-plugins/text')|pregReplace('/\\?.*/', '') }}',
-					'jquery': '{{ asset('vendor/jquery/jquery')|pregReplace('/\\?.*/', '') }}',
-					'twitter-bootstrap': '{{ asset('bundles/triworkskimdotcomcommon/twitter-bootstrap/js/bootstrap')|pregReplace('/\\?.*/', '') }}',
-					'amd-utils': '{{ asset('vendor/amd-utils')|pregReplace('/\\?.*/', '') }}',
-					'classify': '{{ asset('vendor/classify/strict')|pregReplace('/\\?.*/', '') }}',
-					'doT': '{{ asset('vendor/doT/doT')|pregReplace('/\\?.*/', '') }}'
+					'order':             '../vendor/requirejs/order',
+					'text':              '../vendor/requirejs/text',
+					'jquery':            '../vendor/jquery/jquery',
+					'twitter-bootstrap': '../vendor/twitter/bootstrap',
+					'amd-utils':         '../vendor/amd-utils',
+					'classify':          '../vendor/Classify/' + (config.environment == 'dev' ? 'strict' : 'loose'),
+					'doT':               '../vendor/doT/doT',
+					'templates':         '../templates'
 				},
 				priority: ['jquery'],
 				urlArgs: config.environment == 'dev' ? + new Date() : ''
@@ -41,6 +42,10 @@
 		;
 
 		requirejs.config(requirejs_config);
+
+		require(['Application/ApplicationController'], function (ApplicationController) {
+			var appController = new ApplicationController(config);
+		});
 	</script>
 </body>
 </html>

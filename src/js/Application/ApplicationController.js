@@ -11,14 +11,20 @@ define([
 	'classify/Class',
 	'jquery',
 	'doT',
+	'amd-utils/object/mixIn',
 	'../Footer/FooterController',
 	'../Header/HeaderController',
 	'text!templates/Application/layout.html'
-], function (Class, $, doT, FooterController, HeaderController, layoutTemplate) {
+], function (Class, $, doT, mixIn, FooterController, HeaderController, layoutTemplate) {
 
 	'use strict';
 
 	var ApplicationController = {
+
+		_config: {
+			environment: 'dev',
+			debug:        true
+		},
 
 		_bodyElement: null,
 
@@ -28,8 +34,12 @@ define([
 
 		/**
          * Constructor.
+         * 
+         * @param {object} config An object
          */
-		initialize: function () {
+		initialize: function (config) {
+			mixIn(this._config, config);
+
 			this._bodyElement = $(document.body);
 
 			this._bodyElement.html(doT.compile(layoutTemplate)());

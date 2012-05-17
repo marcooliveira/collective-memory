@@ -1,0 +1,2 @@
+- check for JSLint errors
+- read hash and initialize the modules according to the routing

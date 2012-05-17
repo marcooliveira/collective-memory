@@ -26,6 +26,14 @@
 
 
 		{
+			"title": "AMD-Utils",
+			"src": "../vendor/amd-utils/src",
+			"dst": "../web/vendor/amd-utils",
+			"type": "dir"
+		},
+
+
+		{
 			"title": "requirejs order",
 			"src": "../vendor/requirejs/order.js",
 			"dst": "../web/vendor/requirejs/order.js",

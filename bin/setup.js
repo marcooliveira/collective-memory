@@ -74,12 +74,12 @@ for (i = 0; i < total; i = i + 1) {
 	type = config.setup_symlinks[i].type;
 	tmp = config.setup_symlinks[i].title.field + ' (' + destination.note + '): ';
 
-	console.log('checking for ' + destination.red);
+//	console.log('checking for ' + destination.red);
 	if (!fileExists(destination)) {
 
 		parent_dir = destination.match(/(.+)[\/\\]/);
 		if (!isDirectory(parent_dir)) {
-			console.log('going to create: ' + parent_dir[1]);
+//			console.log('going to create: ' + parent_dir[1]);
 			mkdirp.sync(parent_dir[1], 0744);
 		}
 		fs.symlinkSync(source, destination, type);
