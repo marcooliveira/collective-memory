@@ -24,7 +24,7 @@ define([
 
 		/**
 		 * Constructor.
-	     */
+		 */
 		initialize: function (element) {
 			this._element = $(element);
 			this._element.html(doT.compile(layoutTemplate)());
