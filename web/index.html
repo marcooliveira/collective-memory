@@ -25,16 +25,16 @@
 				debug: true
 			},
 			requirejs_config = {
-				baseUrl: 'js',
+				baseUrl: 'js/modules',
 				paths: {
-					'order':             '../vendor/requirejs/order',
-					'text':              '../vendor/requirejs/text',
-					'jquery':            '../vendor/jquery/jquery',
-					'twitter-bootstrap': '../vendor/twitter/bootstrap',
-					'amd-utils':         '../vendor/amd-utils',
-					'classify':          '../vendor/Classify/' + (config.environment == 'dev' ? 'strict' : 'loose'),
-					'doT':               '../vendor/doT/doT',
-					'templates':         '../templates'
+					'order':             '../../vendor/requirejs/order',
+					'text':              '../../vendor/requirejs/text',
+					'jquery':            '../../vendor/jquery/jquery',
+					'twitter-bootstrap': '../../vendor/twitter/bootstrap',
+					'amd-utils':         '../../vendor/amd-utils',
+					'classify':          '../../vendor/Classify/' + (config.environment == 'dev' ? 'strict' : 'loose'),
+					'doT':               '../../vendor/doT/doT',
+					'templates':         '../../templates'
 				},
 				priority: ['jquery'],
 				urlArgs: config.environment == 'dev' ? + new Date() : ''

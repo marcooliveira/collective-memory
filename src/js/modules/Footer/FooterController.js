@@ -2,7 +2,7 @@
 /*globals define*/
 
 /**
- * Module/Class description.
+ * FooterController class.
  *
  * @author André Cruz <andremiguelcruz@msn.com>
  * @author Marco Oliveira <marcooliveira@ua.pt>
@@ -11,15 +11,15 @@ define(['classify/Class'], function (Class) {
 
 	'use strict';
 
-	var HeaderController = {
+	var FooterController = {
 
 		/**
 		 * Constructor.
 		 */
 		initialize: function (element) {
-			console.log('header construct', element);
+			console.log('footer construct', element);
 		}
 	};
 
-	return new Class(HeaderController);
+	return new Class(FooterController);
 });
