@@ -1,8 +1,7 @@
 {
 	"setup_dirs": [
 		"../web/css",
-		"../web/vendor",
-		"../web/vendor/requirejs"
+		"../web/vendor"
 	],
 	"setup_symlinks": [
 		{
