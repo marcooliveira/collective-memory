@@ -7,11 +7,16 @@
  * @author André Cruz <andremiguelcruz@msn.com>
  * @author Marco Oliveira <marcooliveira@ua.pt>
  */
-define(['classify/Class'], function (Class) {
+define([
+	'classify/Class',
+	'../BaseController',
+], function (Class, BaseController) {
 
 	'use strict';
 
 	var HeaderController = {
+		$name: 'HeaderController',
+		$extends: BaseController,
 
 		/**
 		 * Constructor.

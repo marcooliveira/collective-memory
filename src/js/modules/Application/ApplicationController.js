@@ -9,17 +9,20 @@
  */
 define([
 	'classify/Class',
+	'../BaseController',
 	'jquery',
 	'amd-utils/object/mixIn',
 	'./ApplicationView',
 	'../Header/HeaderController',
 	'../Footer/FooterController',
-], function (Class, $, mixIn, ApplicationView, HeaderController, FooterController) {
+], function (Class, BaseController, $, mixIn, ApplicationView, HeaderController, FooterController) {
 
 	'use strict';
 
 	var ApplicationController = {
-
+		$name: 'ApplicationController',
+		$extends: BaseController,
+		
 		_config: {
 			environment: 'dev',
 			debug:        true
