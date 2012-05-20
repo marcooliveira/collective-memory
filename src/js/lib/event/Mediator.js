@@ -13,55 +13,55 @@ define(['classify/Class', './EventsEmitter'], function (Class, EventsEmitter) {
 
     'use strict';
 
-	var MediatorClass,
-		Mediator = {
+    var MediatorClass,
+        Mediator = {
 
-			$name: 'Mediator',
-			$extends: EventsEmitter,
+            $name: 'Mediator',
+            $extends: EventsEmitter,
 
-			/**
-			 *
-			 */
-			initialize: function () {
-				if (!this.$self()._initializing) {
-					throw new Error('This is a singleton, use getInstance() instead.');
-				}
-			},
+            /**
+             *
+             */
+            initialize: function () {
+                if (!this.$self()._initializing) {
+                    throw new Error('This is a singleton, use getInstance() instead.');
+                }
+            },
 
-			/**
-			* Fires an event.
-			*
-			* @param {String}   name The event name
-			* @param {...mixed} args The arguments to pass to each listener
-			*
-			* @return {mixed} The instance itself to allow chaining
-			*/
-			fireEvent: function (name, args) {
-				return this._fireEvent.apply(this, arguments);
-			},
+            /**
+            * Fires an event.
+            *
+            * @param {String}   name The event name
+            * @param {...mixed} args The arguments to pass to each listener
+            *
+            * @return {mixed} The instance itself to allow chaining
+            */
+            fireEvent: function (name, args) {
+                return this._fireEvent.apply(this, arguments);
+            },
 
-			$statics: {
-				_instance: null,
-				_initializing: false,
+            $statics: {
+                _instance: null,
+                _initializing: false,
 
-				/**
-				*
-				*/
-				getInstance: function () {
-					if (this._instance === null) {
-						this._initializing = true;
-						try {
-							this._instance = new MediatorClass();
-						} finally {}
-						this._initializing = false;
-					}
+                /**
+                *
+                */
+                getInstance: function () {
+                    if (this._instance === null) {
+                        this._initializing = true;
+                        try {
+                            this._instance = new MediatorClass();
+                        } finally {}
+                        this._initializing = false;
+                    }
 
-					return this._instance;
-				}
-			}
-		};
+                    return this._instance;
+                }
+            }
+        };
 
-	MediatorClass = new Class(Mediator);
+    MediatorClass = new Class(Mediator);
 
     return MediatorClass;
 });

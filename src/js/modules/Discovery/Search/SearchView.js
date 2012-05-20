@@ -8,32 +8,32 @@
  * @author Marco Oliveira <marcooliveira@ua.pt>
  */
 define([
-	'classify/Class',
-	'BaseView',
-	'jquery',
-	'doT'
+    'classify/Class',
+    'BaseView',
+    'jquery',
+    'doT'
 ], function (Class, BaseView, $, doT) {
 
-	'use strict';
+    'use strict';
 
-	var SearchView = {
-		$name: 'SearchView',
-		$extends: BaseView,
+    var SearchView = {
+        $name: 'SearchView',
+        $extends: BaseView,
 
-		/**
-		 *
-		 */
-		initialize: function () {
-			this.$super();
-		},
+        /**
+         *
+         */
+        initialize: function () {
+            this.$super();
+        },
 
-		/**
-		 *
-		 */
-		destroy: function () {
+        /**
+         *
+         */
+        destroy: function () {
 
-		}
-	}
+        }
+    }
 
-	return new Class(SearchView);
+    return new Class(SearchView);
 });

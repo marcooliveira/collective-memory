@@ -8,35 +8,35 @@
  * @author Marco Oliveira <marcooliveira@ua.pt>
  */
 define([
-	'classify/Class',
-	'BaseController',
-	'./MapView'
+    'classify/Class',
+    'BaseController',
+    './MapView'
 ], function (Class, BaseController, MapView) {
 
-	'use strict';
+    'use strict';
 
-	var MapController = {
-		$name: 'MapController',
-		$extends: BaseController,
+    var MapController = {
+        $name: 'MapController',
+        $extends: BaseController,
 
-		_view: null,
+        _view: null,
 
-		/**
-		 * Constructor.
-		 */
-		initialize: function (element) {
-			console.log('map construct', element);
+        /**
+         * Constructor.
+         */
+        initialize: function (element) {
+            console.log('map construct', element);
 
-			this._view = new MapView(element);
-		},
+            this._view = new MapView(element);
+        },
 
-		/**
-		 *
-		 */
-		destroy: function () {
+        /**
+         *
+         */
+        destroy: function () {
 
-		}
-	};
+        }
+    };
 
-	return new Class(MapController);
+    return new Class(MapController);
 });

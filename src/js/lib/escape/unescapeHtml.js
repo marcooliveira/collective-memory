@@ -10,13 +10,13 @@ define(function () {
 
     'use strict';
 
-	/**
-	 * Unescapes any escaped html.
-	 *
-	 * @param {String} str The string containing the html
-	 *
-	 * @return {String} The unescaped html
-	 */
+    /**
+     * Unescapes any escaped html.
+     *
+     * @param {String} str The string containing the html
+     *
+     * @return {String} The unescaped html
+     */
     function unescapeHTML(str) {
         return str.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&").replace(/&#39;/g, "'").replace(/&quot;/g, '"');
     }

@@ -8,35 +8,35 @@
  * @author Marco Oliveira <marcooliveira@ua.pt>
  */
 define([
-	'classify/Class',
-	'BaseView',
-	'jquery',
-	'doT',
-	'text!templates/Header/structure.html'
+    'classify/Class',
+    'BaseView',
+    'jquery',
+    'doT',
+    'text!templates/Header/structure.html'
 ], function (Class, BaseView, $, doT, structureTemplate) {
 
-	'use strict';
+    'use strict';
 
-	var HeaderView = {
-		$name: 'HeaderView',
-		$extends: BaseView,
+    var HeaderView = {
+        $name: 'HeaderView',
+        $extends: BaseView,
 
-		/**
-		 *
-		 */
-		initialize: function (element) {
-			this.$super(element);
+        /**
+         *
+         */
+        initialize: function (element) {
+            this.$super(element);
 
-			this._element.html(doT.compile(structureTemplate)());
-		},
+            this._element.html(doT.compile(structureTemplate)());
+        },
 
-		/**
-		 *
-		 */
-		destroy: function () {
+        /**
+         *
+         */
+        destroy: function () {
 
-		}
-	}
+        }
+    }
 
-	return new Class(HeaderView);
+    return new Class(HeaderView);
 });

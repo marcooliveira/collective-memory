@@ -8,66 +8,66 @@
  * @author Marco Oliveira <marcooliveira@ua.pt>
  */
 define([
-	'classify/Class',
-	'BaseController',
-	'jquery',
-	'amd-utils/object/mixIn',
-	'./ApplicationView',
-	'Header/HeaderController',
-	'Footer/FooterController',
-	'Discovery/DiscoveryController',
+    'classify/Class',
+    'BaseController',
+    'jquery',
+    'amd-utils/object/mixIn',
+    './ApplicationView',
+    'Header/HeaderController',
+    'Footer/FooterController',
+    'Discovery/DiscoveryController',
 ], function (Class, BaseController, $, mixIn, ApplicationView, HeaderController, FooterController, DiscoveryController) {
 
-	'use strict';
+    'use strict';
 
-	var ApplicationController = {
-		$name: 'ApplicationController',
-		$extends: BaseController,
+    var ApplicationController = {
+        $name: 'ApplicationController',
+        $extends: BaseController,
 
-		_config: {
-			environment: 'dev',
-			debug:        true
-		},
+        _config: {
+            environment: 'dev',
+            debug:        true
+        },
 
-		_headerController: null,
-		_footerController: null,
-		_contentController: null,
+        _headerController: null,
+        _footerController: null,
+        _contentController: null,
 
-		_view: null,
+        _view: null,
 
 
-		/**
-		 * Constructor.
-		 *
-		 * @param {object} config An object
-		 */
-		initialize: function (config) {
-			mixIn(this._config, config);
+        /**
+         * Constructor.
+         *
+         * @param {object} config An object
+         */
+        initialize: function (config) {
+            mixIn(this._config, config);
 
-			this._view = new ApplicationView($(document.body));
+            this._view = new ApplicationView($(document.body));
 
-			this._headerController = new HeaderController(this._view.getHeader());
-			this._footerController = new FooterController(this._view.getFooter());
+            this._headerController = new HeaderController(this._view.getHeader());
+            this._footerController = new FooterController(this._view.getFooter());
 
-			this._readHash();
-		},
+            this._readHash();
+        },
 
-		/**
-		 *
-		 */
-		destroy: function () {
-			
-		},
+        /**
+         *
+         */
+        destroy: function () {
+            
+        },
 
-		/**
-		 *
-		 */
-		_readHash: function () {
-			// TODO: read hash and initialize the modules according to the routing
+        /**
+         *
+         */
+        _readHash: function () {
+            // TODO: read hash and initialize the modules according to the routing
 
-			this._contentController = new DiscoveryController(this._view.getContent());
-		},
-	};
+            this._contentController = new DiscoveryController(this._view.getContent());
+        },
+    };
 
-	return new Class(ApplicationController);
+    return new Class(ApplicationController);
 });

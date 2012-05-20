@@ -8,30 +8,30 @@
  * @author Marco Oliveira <marcooliveira@ua.pt>
  */
 define([
-	'classify/Class',
-	'BaseController',
+    'classify/Class',
+    'BaseController',
 ], function (Class, BaseController) {
 
-	'use strict';
+    'use strict';
 
-	var SearchController = {
-		$name: 'SearchController',
-		$extends: BaseController,
+    var SearchController = {
+        $name: 'SearchController',
+        $extends: BaseController,
 
-		/**
-		 * Constructor.
-		 */
-		initialize: function (element) {
-			console.log('search construct', element);
-		},
+        /**
+         * Constructor.
+         */
+        initialize: function (element) {
+            console.log('search construct', element);
+        },
 
-		/**
-		 *
-		 */
-		destroy: function () {
+        /**
+         *
+         */
+        destroy: function () {
 
-		}
-	};
+        }
+    };
 
-	return new Class(SearchController);
+    return new Class(SearchController);
 });

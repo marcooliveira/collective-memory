@@ -8,35 +8,35 @@
  * @author Marco Oliveira <marcooliveira@ua.pt>
  */
 define([
-	'classify/Class',
-	'BaseController',
-	'./HeaderView'
+    'classify/Class',
+    'BaseController',
+    './HeaderView'
 ], function (Class, BaseController, HeaderView) {
 
-	'use strict';
+    'use strict';
 
-	var HeaderController = {
-		$name: 'HeaderController',
-		$extends: BaseController,
+    var HeaderController = {
+        $name: 'HeaderController',
+        $extends: BaseController,
 
-		_view: null,
+        _view: null,
 
-		/**
-		 * Constructor.
-		 */
-		initialize: function (element) {
-			console.log('header construct', element);
+        /**
+         * Constructor.
+         */
+        initialize: function (element) {
+            console.log('header construct', element);
 
-			this._view = new HeaderView(element);
-		},
+            this._view = new HeaderView(element);
+        },
 
-		/**
-		 *
-		 */
-		destroy: function () {
+        /**
+         *
+         */
+        destroy: function () {
 
-		}
-	};
+        }
+    };
 
-	return new Class(HeaderController);
+    return new Class(HeaderController);
 });

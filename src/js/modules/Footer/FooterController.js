@@ -8,30 +8,30 @@
  * @author Marco Oliveira <marcooliveira@ua.pt>
  */
 define([
-	'classify/Class',
-	'BaseController',
+    'classify/Class',
+    'BaseController',
 ], function (Class, BaseController) {
 
-	'use strict';
+    'use strict';
 
-	var FooterController = {
-		$name: 'FooterController',
-		$extends: BaseController,
+    var FooterController = {
+        $name: 'FooterController',
+        $extends: BaseController,
 
-		/**
-		 * Constructor.
-		 */
-		initialize: function (element) {
-			console.log('footer construct', element);
-		},
+        /**
+         * Constructor.
+         */
+        initialize: function (element) {
+            console.log('footer construct', element);
+        },
 
-		/**
-		 *
-		 */
-		destroy: function () {
+        /**
+         *
+         */
+        destroy: function () {
 
-		}
-	};
+        }
+    };
 
-	return new Class(FooterController);
+    return new Class(FooterController);
 });

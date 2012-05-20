@@ -38,7 +38,7 @@ define([
             ERR_403: '403',
             ERR_400: '400',
             ERR_TIMEOUT: 'timeout',
-			ERR_UNAUTHORIZED: 'unauthorized'
+            ERR_UNAUTHORIZED: 'unauthorized'
             //ERR_SESSION_INVALID: 'session_invalid',
         },
 
