@@ -1,3 +1,36 @@
+@import 'compass/css3';
+
 #header {
-	background: #FFF;
+	height: 70px;
+	background-color: red;
+	position: relative;
+}
+
+#header .logo {
+	width: 260px;
+	height: 45px;
+	background-color: #000;
+	position: relative;
+	top: 10px;
+	left: 10px;
+    //background-image: image-url('loader/loader_16.gif');
+}
+
+#header .login {
+	width: 170px;
+	height: 70px;
+	background: purple;
+	position: absolute;
+	top: 0px;
+	right: 10px;
+
+	.login-button {
+		width: 87px;
+		height: 21px;
+		background-image: image-url('common/fblogin.png');
+		position: absolute;
+		top: 22px;
+		right: 0px;
+		@include single-box-shadow(rgba(0, 0, 0, 0.7), 0px, 0px, 7px, 7px, false);
+	}
 }

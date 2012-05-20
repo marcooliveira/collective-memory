@@ -10,7 +10,8 @@
 define([
 	'classify/Class',
 	'BaseController',
-], function (Class, BaseController) {
+	'./HeaderView'
+], function (Class, BaseController, HeaderView) {
 
 	'use strict';
 
@@ -18,11 +19,15 @@ define([
 		$name: 'HeaderController',
 		$extends: BaseController,
 
+		_view: null,
+
 		/**
 		 * Constructor.
 		 */
 		initialize: function (element) {
 			console.log('header construct', element);
+
+			this._view = new HeaderView(element);
 		},
 
 		/**

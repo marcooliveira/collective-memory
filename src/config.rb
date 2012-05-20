@@ -5,6 +5,9 @@ http_path = "/"
 css_dir = "../web/css"
 sass_dir = "sass"
 images_dir = "images"
+http_images_path = "/images"
+http_generated_images_path = "/images"
+
 javascripts_dir = "javascripts"
 
 # You can select your preferred output style here (can be overridden via the command line):

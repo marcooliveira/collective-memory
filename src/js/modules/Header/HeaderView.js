@@ -11,8 +11,9 @@ define([
 	'classify/Class',
 	'BaseView',
 	'jquery',
-	'doT'
-], function (Class, BaseView, $, doT) {
+	'doT',
+	'text!templates/Header/structure.html'
+], function (Class, BaseView, $, doT, structureTemplate) {
 
 	'use strict';
 
@@ -23,8 +24,10 @@ define([
 		/**
 		 *
 		 */
-		initialize: function () {
-			this.$super();
+		initialize: function (element) {
+			this.$super(element);
+
+			this._element.html(doT.compile(structureTemplate)());
 		},
 
 		/**

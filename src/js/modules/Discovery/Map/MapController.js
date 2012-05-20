@@ -10,7 +10,8 @@
 define([
 	'classify/Class',
 	'BaseController',
-], function (Class, BaseController) {
+	'./MapView'
+], function (Class, BaseController, MapView) {
 
 	'use strict';
 
@@ -18,11 +19,15 @@ define([
 		$name: 'MapController',
 		$extends: BaseController,
 
+		_view: null,
+
 		/**
 		 * Constructor.
 		 */
 		initialize: function (element) {
 			console.log('map construct', element);
+
+			this._view = new MapView(element);
 		},
 
 		/**

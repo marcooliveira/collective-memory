@@ -30,6 +30,7 @@ define([
 		initialize: function (element) {
 			this.$super(element);
 
+			this._element.addClass('discovery-module');
 			this._element.html(doT.compile(structureTemplate)());
 
 			this._searchElement = this._element.find('.search-module').eq(0);
@@ -54,7 +55,9 @@ define([
 		 *
 		 */
 		destroy: function () {
+			this._element.empty();
 
+			this._element.removeClass('discovery-module');
 		}
 	}
 
