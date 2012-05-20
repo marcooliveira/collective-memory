@@ -5,17 +5,21 @@
  * ApplicationView class.
  *
  * @author André Cruz <andremiguelcruz@msn.com>
+ * @author Marco Oliveira <marcooliveira@ua.pt>
  */
 define([
 	'classify/Class',
+	'BaseView',
 	'jquery',
 	'doT',
 	'text!templates/Application/layout.html'
-], function (Class,  $, doT, layoutTemplate) {
+], function (Class, BaseView, $, doT, layoutTemplate) {
 
 	'use strict';
 
 	var ApplicationView = {
+		$name: 'ApplicationView',
+		$extends: BaseView,
 
 		_element: null,
 		_headerElement: null,
@@ -60,7 +64,14 @@ define([
 		 */
 		getContent: function () {
 			return this._contentElement;
-		}
+		},
+
+		/**
+		 *
+		 */
+		destroy: function () {
+
+		},
 	};
 
 	return new Class(ApplicationView);

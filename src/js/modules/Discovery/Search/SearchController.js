@@ -2,7 +2,7 @@
 /*globals define*/
 
 /**
- * FooterController class.
+ * SearchController class.
  *
  * @author André Cruz <andremiguelcruz@msn.com>
  * @author Marco Oliveira <marcooliveira@ua.pt>
@@ -14,15 +14,15 @@ define([
 
 	'use strict';
 
-	var FooterController = {
-		$name: 'FooterController',
+	var SearchController = {
+		$name: 'SearchController',
 		$extends: BaseController,
 
 		/**
 		 * Constructor.
 		 */
 		initialize: function (element) {
-			console.log('footer construct', element);
+			console.log('search construct', element);
 		},
 
 		/**
@@ -33,5 +33,5 @@ define([
 		}
 	};
 
-	return new Class(FooterController);
+	return new Class(SearchController);
 });

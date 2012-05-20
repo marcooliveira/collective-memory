@@ -18,7 +18,7 @@
 define([
     'classify/Class',
     'jquery',
-    'common/event/EventsEmitter',
+    'lib/event/EventsEmitter',
     'amd-utils/lang/bind',
     'amd-utils/lang/isObject',
     'amd-utils/object/mixIn'

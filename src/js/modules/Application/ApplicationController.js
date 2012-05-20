@@ -9,20 +9,21 @@
  */
 define([
 	'classify/Class',
-	'../BaseController',
+	'BaseController',
 	'jquery',
 	'amd-utils/object/mixIn',
 	'./ApplicationView',
-	'../Header/HeaderController',
-	'../Footer/FooterController',
-], function (Class, BaseController, $, mixIn, ApplicationView, HeaderController, FooterController) {
+	'Header/HeaderController',
+	'Footer/FooterController',
+	'Discovery/DiscoveryController',
+], function (Class, BaseController, $, mixIn, ApplicationView, HeaderController, FooterController, DiscoveryController) {
 
 	'use strict';
 
 	var ApplicationController = {
 		$name: 'ApplicationController',
 		$extends: BaseController,
-		
+
 		_config: {
 			environment: 'dev',
 			debug:        true
@@ -30,6 +31,7 @@ define([
 
 		_headerController: null,
 		_footerController: null,
+		_contentController: null,
 
 		_view: null,
 
@@ -53,9 +55,18 @@ define([
 		/**
 		 *
 		 */
+		destroy: function () {
+			
+		},
+
+		/**
+		 *
+		 */
 		_readHash: function () {
 			// TODO: read hash and initialize the modules according to the routing
-		}
+
+			this._contentController = new DiscoveryController(this._view.getContent());
+		},
 	};
 
 	return new Class(ApplicationController);

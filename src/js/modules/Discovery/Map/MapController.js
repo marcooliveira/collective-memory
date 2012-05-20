@@ -2,7 +2,7 @@
 /*globals define*/
 
 /**
- * FooterController class.
+ * MapController class.
  *
  * @author André Cruz <andremiguelcruz@msn.com>
  * @author Marco Oliveira <marcooliveira@ua.pt>
@@ -14,15 +14,15 @@ define([
 
 	'use strict';
 
-	var FooterController = {
-		$name: 'FooterController',
+	var MapController = {
+		$name: 'MapController',
 		$extends: BaseController,
 
 		/**
 		 * Constructor.
 		 */
 		initialize: function (element) {
-			console.log('footer construct', element);
+			console.log('map construct', element);
 		},
 
 		/**
@@ -33,5 +33,5 @@ define([
 		}
 	};
 
-	return new Class(FooterController);
+	return new Class(MapController);
 });

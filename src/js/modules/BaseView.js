@@ -6,7 +6,7 @@
  *
  * @author André Cruz <andremiguelcruz@msn.com>
  */
-define(['classify/AbstractClass', '../event/EventsEmitter'], function (AbstractClass, EventsEmitter) {
+define(['classify/AbstractClass', 'lib/event/EventsEmitter'], function (AbstractClass, EventsEmitter) {
 
 	'use strict';
 
@@ -34,6 +34,14 @@ define(['classify/AbstractClass', '../event/EventsEmitter'], function (AbstractC
 		 */
 		getElement: function () {
 			return this._element;
+		},
+
+		$abstracts: {
+
+			/**
+			 * Destroys the view.
+			 */
+			destroy: function () {}
 		}
 	};
 

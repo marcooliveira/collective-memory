@@ -9,7 +9,7 @@
  */
 define([
 	'classify/Class',
-	'../BaseController',
+	'BaseController',
 ], function (Class, BaseController) {
 
 	'use strict';
@@ -23,6 +23,13 @@ define([
 		 */
 		initialize: function (element) {
 			console.log('header construct', element);
+		},
+
+		/**
+		 *
+		 */
+		destroy: function () {
+
 		}
 	};
 
