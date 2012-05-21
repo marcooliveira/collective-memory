@@ -9,7 +9,7 @@
  */
 define([
     'classify/Class',
-    'BaseController',
+    'BaseController'
 ], function (Class, BaseController) {
 
     'use strict';

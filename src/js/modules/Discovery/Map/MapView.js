@@ -1,5 +1,5 @@
 /*jslint browser:true, devel:true, nomen:true*/
-/*global define*/
+/*global define, google*/
 
 /**
  * MapView class.
@@ -95,7 +95,7 @@ define([
         destroy: function () {
 
         }
-    }
+    };
 
     return new Class(MapView);
 });

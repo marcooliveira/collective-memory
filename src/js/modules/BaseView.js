@@ -6,7 +6,11 @@
  *
  * @author André Cruz <andremiguelcruz@msn.com>
  */
-define(['classify/AbstractClass', 'lib/event/EventsEmitter'], function (AbstractClass, EventsEmitter) {
+define([
+    'classify/AbstractClass',
+    'lib/event/EventsEmitter',
+    'jquery'
+], function (AbstractClass, EventsEmitter, $) {
 
     'use strict';
 

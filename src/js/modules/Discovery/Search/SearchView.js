@@ -42,7 +42,7 @@ define([
         destroy: function () {
 
         }
-    }
+    };
 
     return new Class(SearchView);
 });
