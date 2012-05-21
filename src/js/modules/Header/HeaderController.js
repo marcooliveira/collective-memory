@@ -18,6 +18,7 @@ define([
     var HeaderController = {
         $name: 'HeaderController',
         $extends: BaseController,
+        $binds: '_handleTimeFilterChange',
 
         _view: null,
 
@@ -28,6 +29,7 @@ define([
             console.log('header construct', element);
 
             this._view = new HeaderView(element);
+            this._view.addListener(HeaderView.EVENT_TIME_FILTER_CHANGE, this._handleTimeFilterChange);
         },
 
         /**
@@ -35,6 +37,13 @@ define([
          */
         destroy: function () {
 
+        },
+
+        /**
+         *
+         */
+        _handleTimeFilterChange: function (range) {
+            console.log('time filter change', range);
         }
     };
 

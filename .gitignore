@@ -76,9 +76,8 @@ node_modules
 
 # Project Specific #
 ######################
-web/css
-web/js
-web/templates
-web/vendor
-web/images
-/src/sass/jquery-ui
+/web/css
+/web/js
+/web/templates
+/web/vendor
+/web/images

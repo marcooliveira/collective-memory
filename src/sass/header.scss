@@ -34,3 +34,11 @@
         @include single-box-shadow(rgba(0, 0, 0, 1), 0px, 0px, 5px, 1px, false);
     }
 }
+
+#header .time-span {
+    position: absolute;
+    top: 30px;
+    left: 300px;
+    right: 200px;
+    height: 5px;
+}

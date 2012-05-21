@@ -77,17 +77,10 @@
 			"dst": "../web/vendor/jquery/jquery.js",
 			"type": "file"
 		},
-		{
-			"title": "jquery-ui-sass",
-
-			"src": "../vendor/jquery-ui/css/smoothness/jquery-ui-1.8.20.custom.css",
-			"dst": "../src/sass/jquery-ui/jquery-ui.custom.scss",
-			"type": "file"
-		},
-		{
-			"title": "jquery-ui-images",
-			"src": "../vendor/jquery-ui/css/smoothness/images",
-			"dst": "../src/sass/jquery-ui/images",
+        {
+			"title": "jquery-ui-css",
+			"src": "../src/sass/jquery-ui",
+			"dst": "../web/css/jquery-ui",
 			"type": "dir"
 		},
 		{
