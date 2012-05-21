@@ -12,8 +12,9 @@ define([
     'BaseView',
     'jquery',
     'doT',
-    'text!templates/Discovery/map-module.html'
-], function (Class, BaseView, $, doT, template) {
+    'amd-utils/object/mixIn',
+    'text!templates/Discovery/Map/structure.html'
+], function (Class, BaseView, $, doT, mixIn, structureTemplate) {
 
     'use strict';
 
@@ -22,13 +23,19 @@ define([
         $extends: BaseView,
         $binds: ['_handleZoomChanged', '_handleCenterChanged'],
 
+        _options: {
+            zoom: 15,
+            center: {
+                lat: 40.63457,
+                lng: -8.65738
+            }
+        },
+
         _mapElement: null,
         _searchElement: null,
 
         _map: null,
         _mapOptions: {
-            zoom: 15,
-            center: new google.maps.LatLng(40.63457, -8.65738),
             mapTypeId: google.maps.MapTypeId.ROADMAP, // HYBRID,
             zoomControlOptions: {
                 position: google.maps.ControlPosition.LEFT_CENTER
@@ -41,12 +48,17 @@ define([
         /**
          *
          */
-        initialize: function (element) {
+        initialize: function (element, $options) {
             this.$super(element);
 
-            this._element.html(doT.compile(template)());
+            mixIn(this._options, $options || {});
+
+            this._element.html(doT.compile(structureTemplate)());
             this._searchElement = this._element.find('.search-input').eq(0);
             this._mapElement = this._element.find('.map').eq(0);
+
+            this._mapOptions.center = new google.maps.LatLng(this._options.center.lat, this._options.center.lng);
+            this._mapOptions.zoom = this._options.zoom;
 
             this._map = new google.maps.Map(this._mapElement.get(0), this._mapOptions);
 

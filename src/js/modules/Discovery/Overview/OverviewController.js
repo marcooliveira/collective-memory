@@ -2,7 +2,7 @@
 /*globals define*/
 
 /**
- * MapController class.
+ * OverviewController class.
  *
  * @author André Cruz <andremiguelcruz@msn.com>
  * @author Marco Oliveira <marcooliveira@ua.pt>
@@ -10,13 +10,13 @@
 define([
     'classify/Class',
     'BaseController',
-    './MapView'
-], function (Class, BaseController, MapView) {
+    './OverviewView'
+], function (Class, BaseController, OverviewView) {
 
     'use strict';
 
-    var MapController = {
-        $name: 'MapController',
+    var OverviewController = {
+        $name: 'OverviewController',
         $extends: BaseController,
 
         _view: null,
@@ -25,12 +25,9 @@ define([
          * Constructor.
          */
         initialize: function (element) {
-            console.log('map construct', element);
+            console.log('overview construct', element);
 
-            this._view = new MapView(element, {
-                zoom: 15,
-                center: { lat: 40.63457, lng: -8.65738 }
-            });
+            this._view = new OverviewView(element);
         },
 
         /**
@@ -41,5 +38,5 @@ define([
         }
     };
 
-    return new Class(MapController);
+    return new Class(OverviewController);
 });

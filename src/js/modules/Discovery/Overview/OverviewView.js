@@ -2,7 +2,7 @@
 /*global define*/
 
 /**
- * SearchView class.
+ * OverviewView class.
  *
  * @author André Cruz <andremiguelcruz@msn.com>
  * @author Marco Oliveira <marcooliveira@ua.pt>
@@ -12,17 +12,14 @@ define([
     'BaseView',
     'jquery',
     'doT',
-    'text!templates/Discovery/Search/structure.html'
+    'text!templates/Discovery/Overview/structure.html'
 ], function (Class, BaseView, $, doT, structureTemplate) {
 
     'use strict';
 
-    var SearchView = {
-        $name: 'SearchView',
+    var OverviewView = {
+        $name: 'OverviewView',
         $extends: BaseView,
-
-        _searchElement: null,
-        _highlightsElement: null,
 
         /**
          *
@@ -31,9 +28,6 @@ define([
             this.$super(element);
 
             this._element.html(doT.compile(structureTemplate)());
-
-            this._searchElement = this._element.find('.search-input').eq(0);
-            this._highlightsElement = this._element.find('.highlights').eq(0);
         },
 
         /**
@@ -44,5 +38,5 @@ define([
         }
     }
 
-    return new Class(SearchView);
+    return new Class(OverviewView);
 });
