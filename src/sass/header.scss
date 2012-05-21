@@ -3,6 +3,7 @@
 #header {
     background-image: image-url('common/header_bg.png');
     @include single-box-shadow(rgba(0, 0, 0, 0.9), 0px, 0px, 15px, 8px, false);
+    z-index: 20;
 }
 
 #header .logo {

@@ -10,7 +10,8 @@
 define([
     'classify/Class',
     'BaseController',
-], function (Class, BaseController) {
+    './SearchView'
+], function (Class, BaseController, SearchView) {
 
     'use strict';
 
@@ -18,11 +19,15 @@ define([
         $name: 'SearchController',
         $extends: BaseController,
 
+        _view: null,
+
         /**
          * Constructor.
          */
         initialize: function (element) {
             console.log('search construct', element);
+
+            this._view = new SearchView(element);
         },
 
         /**

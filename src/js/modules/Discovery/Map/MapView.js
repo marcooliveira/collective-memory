@@ -29,7 +29,13 @@ define([
         _mapOptions: {
             zoom: 15,
             center: new google.maps.LatLng(40.63457, -8.65738),
-            mapTypeId: google.maps.MapTypeId.ROADMAP // HYBRID
+            mapTypeId: google.maps.MapTypeId.ROADMAP, // HYBRID,
+            zoomControlOptions: {
+                position: google.maps.ControlPosition.LEFT_CENTER
+            },
+            panControlOptions: {
+                position: google.maps.ControlPosition.LEFT_CENTER
+            }
         },
 
         /**

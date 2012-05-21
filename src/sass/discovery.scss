@@ -13,6 +13,13 @@
     left: 200px;
     right: 0px;
 
+    .search-input {
+        position: absolute;
+        top: 18px;
+        left: 18px;
+        z-index: 10;
+    }
+
     .map {
         height: 100%;
         img {
