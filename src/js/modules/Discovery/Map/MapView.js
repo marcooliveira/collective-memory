@@ -12,21 +12,24 @@ define([
     'BaseView',
     'jquery',
     'doT',
-	'amd-utils/lang/bind'
-], function (Class, BaseView, $, doT, bind) {
+    'text!templates/Discovery/map-module.html'
+], function (Class, BaseView, $, doT, template) {
 
     'use strict';
 
     var MapView = {
         $name: 'MapView',
         $extends: BaseView,
-		$binds: ['_handleZoomChanged', '_handleCenterChanged'],
+        $binds: ['_handleZoomChanged', '_handleCenterChanged'],
+
+        _mapElement: null,
+        _searchElement: null,
 
         _map: null,
         _mapOptions: {
             zoom: 15,
             center: new google.maps.LatLng(40.63457, -8.65738),
-            mapTypeId: google.maps.MapTypeId.ROADMAP //HYBRID
+            mapTypeId: google.maps.MapTypeId.ROADMAP // HYBRID
         },
 
         /**
@@ -35,26 +38,38 @@ define([
         initialize: function (element) {
             this.$super(element);
 
-            this._map = new google.maps.Map(element.get(0), this._mapOptions);
+            this._element.html(doT.compile(template)());
+            this._searchElement = this._element.find('.search-input').eq(0);
+            this._mapElement = this._element.find('.map').eq(0);
+
+            this._map = new google.maps.Map(this._mapElement.get(0), this._mapOptions);
 
             this._enableListeners();
         },
 
+        /**
+         *
+         */
         _enableListeners: function () {
             google.maps.event.addListener(this._map, 'zoom_changed', this._handleZoomChanged);
             google.maps.event.addListener(this._map, 'center_changed', this._handleCenterChanged);
         },
 
-		_handleZoomChanged: function () {
-			console.log('zoom changed');
-			console.log(this._map.getZoom());
-		},
+        /**
+         *
+         */
+        _handleZoomChanged: function () {
+            console.log('zoom changed');
+            console.log(this._map.getZoom());
+        },
 
-		_handleCenterChanged: function () {
-			console.log('center changed');
-			console.log(this._map.getCenter());
-		},
-
+        /**
+         *
+         */
+        _handleCenterChanged: function () {
+            console.log('center changed');
+            console.log(this._map.getCenter());
+        },
 
         /**
          *

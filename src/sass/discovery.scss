@@ -1,15 +1,22 @@
 #content.discovery-module .search-module {
-    height: 600px;
     width: 200px;
     background-image: image-url('discovery/search-module/bg.png');
-    float: left;
+    left: 0px;
     .search-query {
-    	margin: 8px;
-    	margin-top: 18px;
+        margin: 8px;
+        margin-top: 18px;
     }
 }
 
 #content.discovery-module .map-module {
-    height: 600px;
     background: light-grey;
+    left: 200px;
+    right: 0px;
+
+    .map {
+        height: 100%;
+        img {
+            max-width: none;
+        }
+    }
 }
