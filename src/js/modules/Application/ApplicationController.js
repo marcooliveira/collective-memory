@@ -56,7 +56,7 @@ define([
          *
          */
         destroy: function () {
-            
+
         },
 
         /**
@@ -66,7 +66,7 @@ define([
             // TODO: read hash and initialize the modules according to the routing
 
             this._contentController = new DiscoveryController(this._view.getContent());
-        },
+        }
     };
 
     return new Class(ApplicationController);

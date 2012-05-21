@@ -12,8 +12,9 @@ define([
     'BaseController',
     './DiscoveryView',
     './Search/SearchController',
-    './Map/MapController'
-], function (Class, BaseController, DiscoveryView, SearchController, MapController) {
+    './Map/MapController',
+    './Overview/OverviewController'
+], function (Class, BaseController, DiscoveryView, SearchController, MapController, OverviewController) {
 
     'use strict';
 
@@ -37,6 +38,7 @@ define([
 
             this._searchController = new SearchController(this._view.getSearchElement());
             this._mapController = new MapController(this._view.getMapElement());
+            this._overviewController = new OverviewController(this._view.getOverviewElement());
         },
 
         /**

@@ -2,7 +2,7 @@
 /*globals define*/
 
 /**
- * FooterController class.
+ * OverviewController class.
  *
  * @author André Cruz <andremiguelcruz@msn.com>
  * @author Marco Oliveira <marcooliveira@ua.pt>
@@ -10,12 +10,13 @@
 define([
     'classify/Class',
     'BaseController',
-    './FooterView'
-], function (Class, BaseController, FooterView) {
+    './OverviewView'
+], function (Class, BaseController, OverviewView) {
+
     'use strict';
 
-    var FooterController = {
-        $name: 'FooterController',
+    var OverviewController = {
+        $name: 'OverviewController',
         $extends: BaseController,
 
         _view: null,
@@ -24,9 +25,9 @@ define([
          * Constructor.
          */
         initialize: function (element) {
-            console.log('footer construct', element);
+            console.log('overview construct', element);
 
-            this._view = new FooterView(element);
+            this._view = new OverviewView(element);
         },
 
         /**
@@ -37,5 +38,5 @@ define([
         }
     };
 
-    return new Class(FooterController);
+    return new Class(OverviewController);
 });

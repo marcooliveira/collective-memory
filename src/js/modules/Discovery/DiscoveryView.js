@@ -23,6 +23,7 @@ define([
 
         _searchElement: null,
         _mapElement: null,
+        _overviewElement: null,
 
         /**
          * {@inheritDoc}
@@ -35,6 +36,7 @@ define([
 
             this._searchElement = this._element.find('.search-module').eq(0);
             this._mapElement = this._element.find('.map-module').eq(0);
+            this._overviewElement = this._element.find('.overview-module').eq(0);
         },
 
         /**
@@ -49,6 +51,13 @@ define([
          */
         getMapElement: function () {
             return this._mapElement;
+        },
+
+        /**
+         *
+         */
+        getOverviewElement: function () {
+            return this._overviewElement;
         },
 
         /**

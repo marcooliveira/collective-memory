@@ -27,7 +27,10 @@ define([
         initialize: function (element) {
             console.log('map construct', element);
 
-            this._view = new MapView(element);
+            this._view = new MapView(element, {
+                zoom: 15,
+                center: { lat: 40.63457, lng: -8.65738 }
+            });
         },
 
         /**
