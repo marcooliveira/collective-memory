@@ -11,14 +11,16 @@ define([
     'classify/Class',
     'BaseView',
     'jquery',
-    'doT'
-], function (Class, BaseView, $, doT, _) {
+    'doT',
+	'amd-utils/lang/bind'
+], function (Class, BaseView, $, doT, bind) {
 
     'use strict';
 
     var MapView = {
         $name: 'MapView',
         $extends: BaseView,
+		$binds: ['_handleZoomChanged', '_handleCenterChanged'],
 
         _map: null,
         _mapOptions: {
@@ -39,17 +41,19 @@ define([
         },
 
         _enableListeners: function () {
-            google.maps.event.addListener(this._map, 'zoom_changed', function () {
-                console.log('zoom changed:');
-                //console.log(this._map.getZoom());
-            }.bind(this));
-
-            google.maps.event.addListener(this._map, 'center_changed', function() {
-                console.log('center changed: ');
-                //console.log(this._map.getCenter());
-            }.bind(this));
-
+            google.maps.event.addListener(this._map, 'zoom_changed', this._handleZoomChanged);
+            google.maps.event.addListener(this._map, 'center_changed', this._handleCenterChanged);
         },
+
+		_handleZoomChanged: function () {
+			console.log('zoom changed');
+			console.log(this._map.getZoom());
+		},
+
+		_handleCenterChanged: function () {
+			console.log('center changed');
+			console.log(this._map.getCenter());
+		},
 
 
         /**
