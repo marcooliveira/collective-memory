@@ -10,7 +10,8 @@
 define([
     'classify/Class',
     'BaseController',
-], function (Class, BaseController) {
+    './FooterView'
+], function (Class, BaseController, FooterView) {
 
     'use strict';
 
@@ -18,11 +19,15 @@ define([
         $name: 'FooterController',
         $extends: BaseController,
 
+        _view: null,
+
         /**
          * Constructor.
          */
         initialize: function (element) {
             console.log('footer construct', element);
+
+            this._view = new FooterView(element);
         },
 
         /**

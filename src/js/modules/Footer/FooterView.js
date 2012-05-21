@@ -11,8 +11,9 @@ define([
     'classify/Class',
     'BaseView',
     'jquery',
-    'doT'
-], function (Class, BaseView, $, doT) {
+    'doT',
+    'text!templates/Footer/template.html'
+], function (Class, BaseView, $, doT, template) {
 
     'use strict';
 
@@ -23,8 +24,12 @@ define([
         /**
          *
          */
-        initialize: function () {
-            this.$super();
+        initialize: function (element) {
+            this.$super(element);
+
+            this._element = element;
+
+            this._element.html(doT.compile(template)());
         },
 
         /**
@@ -33,7 +38,7 @@ define([
         destroy: function () {
 
         }
-    }
+    };
 
     return new Class(FooterView);
 });

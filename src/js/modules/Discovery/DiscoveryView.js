@@ -59,7 +59,7 @@ define([
 
             this._element.removeClass('discovery-module');
         }
-    }
+    };
 
     return new Class(DiscoveryView);
 });
