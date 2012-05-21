@@ -27,7 +27,12 @@ function fileExists(filePath) {
 		fs.statSync(filePath);
 		return true;
     } catch (e) {
-		return false;
+        try {
+            fs.readlinkSync(filePath);
+            return true;
+        } catch (e) {
+            return false;
+        }
     }
 }
 
@@ -74,7 +79,7 @@ for (i = 0; i < total; i = i + 1) {
 	type = config.setup_symlinks[i].type;
 	tmp = config.setup_symlinks[i].title.field + ' (' + destination.note + '): ';
 
-//	console.log('checking for ' + destination.red);
+	console.log('checking for ' + destination.red, fileExists(destination));
 	if (!fileExists(destination)) {
 
 		parent_dir = destination.match(/(.+)[\/\\]/);

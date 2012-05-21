@@ -77,8 +77,25 @@
 			"dst": "../web/vendor/jquery/jquery.js",
 			"type": "file"
 		},
+		{
+			"title": "jquery-ui-sass",
 
-
+			"src": "../vendor/jquery-ui/css/smoothness/jquery-ui-1.8.20.custom.css",
+			"dst": "../src/sass/jquery-ui/jquery-ui.custom.scss",
+			"type": "file"
+		},
+		{
+			"title": "jquery-ui-images",
+			"src": "../vendor/jquery-ui/css/smoothness/images",
+			"dst": "../src/sass/jquery-ui/images",
+			"type": "dir"
+		},
+		{
+			"title": "jquery-ui-js",
+			"src": "../vendor/jquery-ui/js/jquery-ui-1.8.20.custom.min.js",
+			"dst": "../web/vendor/jquery-ui/jquery-ui.min.js",
+			"type": "file"
+		},
 
 		{
 			"title": "twitter bootstrap",
