@@ -8,24 +8,32 @@
 
 #footer .links {
 	display: inline;
+	position: absolute;
+	right: 12px;
+	top: 6px;
 }
 
 #footer .links ul {
 	margin: 0;
-	margin-left: 5px;
 	padding: 0;
 	list-style-type: none;
 }
 
 #footer .links ul li {
 	float: left;
-	padding: 5px;
+	padding-left: 10px;
+
+	&:first-child {
+		padding-left: 0;
+	}
 }
 
 #footer .links ul li a {
-	font-size: 14px;
+	font-size: 13px;
 	@include single-text-shadow(#000,1px,1px,0);
 	text-decoration: none;
+	color: #3878C7;
+	font-weight: bold;
 
 	&:hover {
 		color: #FFFFFF;

@@ -22,7 +22,7 @@
 //    background: purple;
     position: absolute;
     top: 0px;
-    right: 15px;
+    right: 18px;
 
     .login-button {
         width: 87px;
@@ -31,6 +31,6 @@
         position: absolute;
         top: 23px;
         right: 0px;
-        @include single-box-shadow(rgba(0, 0, 0, 0.7), 0px, 0px, 7px, 7px, false);
+        @include single-box-shadow(rgba(0, 0, 0, 1), 0px, 0px, 5px, 1px, false);
     }
 }

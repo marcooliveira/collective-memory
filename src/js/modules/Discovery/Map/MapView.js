@@ -65,16 +65,14 @@ define([
          *
          */
         _handleZoomChanged: function () {
-            console.log('zoom changed');
-            console.log(this._map.getZoom());
+            console.log('zoom changed: ' + this._map.getZoom());
         },
 
         /**
          *
          */
         _handleCenterChanged: function () {
-            console.log('center changed');
-            console.log(this._map.getCenter());
+            console.log('center changed: lat = ' + this._map.getCenter().lat() + ' lng = ' + this._map.getCenter().lng());
         },
 
         /**
