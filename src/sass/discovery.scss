@@ -1,8 +1,12 @@
 #content.discovery-module .search-module {
     height: 600px;
     width: 200px;
-    background: yellow;
+    background-image: image-url('discovery/search-module/bg.png');
     float: left;
+    .search-query {
+    	margin: 8px;
+    	margin-top: 18px;
+    }
 }
 
 #content.discovery-module .map-module {

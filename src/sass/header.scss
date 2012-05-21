@@ -2,34 +2,35 @@
 
 #header {
     height: 70px;
-    background-color: red;
+    background-image: image-url('common/header_bg.png');
     position: relative;
+    @include single-box-shadow(rgba(0, 0, 0, 0.9), 0px, 0px, 15px, 8px, false);
 }
 
 #header .logo {
-    width: 260px;
-    height: 45px;
-    background-color: #000;
+    width: 268px;
+    height: 60px;
+//    background-color: #000;
     position: relative;
-    top: 10px;
-    left: 10px;
-    //background-image: image-url('loader/loader_16.gif');
+    top: 3px;
+    left: 5px;
+    background-image: image-url('common/logo.png');
 }
 
 #header .login {
     width: 170px;
     height: 70px;
-    background: purple;
+//    background: purple;
     position: absolute;
     top: 0px;
-    right: 10px;
+    right: 15px;
 
     .login-button {
         width: 87px;
         height: 21px;
         background-image: image-url('common/fblogin.png');
         position: absolute;
-        top: 22px;
+        top: 23px;
         right: 0px;
         @include single-box-shadow(rgba(0, 0, 0, 0.7), 0px, 0px, 7px, 7px, false);
     }

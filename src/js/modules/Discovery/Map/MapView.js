@@ -22,9 +22,9 @@ define([
 
         _map: null,
         _mapOptions: {
-            zoom: 8,
-            center: new google.maps.LatLng(-34.397, 150.644),
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            zoom: 15,
+            center: new google.maps.LatLng(40.63457, -8.65738),
+            mapTypeId: google.maps.MapTypeId.ROADMAP //HYBRID
         },
 
         /**
@@ -34,7 +34,23 @@ define([
             this.$super(element);
 
             this._map = new google.maps.Map(element.get(0), this._mapOptions);
+
+            this._enableListeners();
         },
+
+        _enableListeners: function () {
+            google.maps.event.addListener(this._map, 'zoom_changed', function () {
+                console.log('zoom changed:');
+                //console.log(this._map.getZoom());
+            }.bind(this));
+
+            google.maps.event.addListener(this._map, 'center_changed', function() {
+                console.log('center changed: ');
+                //console.log(this._map.getCenter());
+            }.bind(this));
+
+        },
+
 
         /**
          *
