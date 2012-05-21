@@ -1,3 +1,4 @@
 - check for JSLint errors
 - read hash and initialize the modules according to the routing
 - check google maps compatibility with amd (find a solution to remove it from the index.html)
+- in the build script, the create symlinks process should check if the symlink dest is different and if it is, overwrite it

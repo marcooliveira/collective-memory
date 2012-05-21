@@ -81,3 +81,4 @@ web/js
 web/templates
 web/vendor
 web/images
+/src/sass/jquery-ui
