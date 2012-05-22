@@ -21,7 +21,12 @@ define([
     var MapView = {
         $name: 'MapView',
         $extends: BaseView,
-        $binds: ['_handleZoomChanged', '_handleCenterChanged'],
+        $binds: ['_handleZoomChanged', '_handleCenterChanged', 'addMarker'],
+        $constants: {
+            EVENT_CENTER_CHANGE: 'center_change',
+            EVENT_ZOOM_CHANGE: 'zoom_change',
+            EVENT_VIEWPORT_CHANGE: 'viewport_change'
+        },
 
         _options: {
             zoom: 15,
@@ -65,6 +70,17 @@ define([
             this._enableListeners();
         },
 
+        addMarker: function (title, position) {
+            var marker = new google.maps.Marker({
+              position: new google.maps.LatLng(position.lat, position.lng),
+              map: this._map,
+              draggable: false,
+              animation: google.maps.Animation.DROP
+            });
+
+            console.log('adding marker', marker, this._map);
+        },
+
         /**
          *
          */
@@ -77,14 +93,45 @@ define([
          *
          */
         _handleZoomChanged: function () {
+            var bounds = this._map.getBounds();
+            
             console.log('zoom changed: ' + this._map.getZoom());
+
+            this._fireEvent(this.$self().EVENT_VIEWPORT_CHANGE,
+                {
+                    tl: {
+                        lat: bounds.getNorthEast().lat(),
+                        lng: bounds.getNorthEast().lng()
+                    },
+                    br: {
+                        lat: bounds.getSouthWest().lat(),
+                        lng: bounds.getSouthWest().lng()
+                    }
+                }
+            );
         },
 
         /**
          *
          */
         _handleCenterChanged: function () {
+            var bounds = this._map.getBounds();
+
             console.log('center changed: lat = ' + this._map.getCenter().lat() + ' lng = ' + this._map.getCenter().lng());
+            this._fireEvent(this.$self().EVENT_CENTER_CHANGE, { lat: this._map.getCenter().lat(), lng: this._map.getCenter().lng() });
+
+            this._fireEvent(this.$self().EVENT_VIEWPORT_CHANGE,
+                {
+                    tl: {
+                        lat: bounds.getNorthEast().lat(),
+                        lng: bounds.getNorthEast().lng()
+                    },
+                    br: {
+                        lat: bounds.getSouthWest().lat(),
+                        lng: bounds.getSouthWest().lng()
+                    }
+                }
+            );
         },
 
         /**
