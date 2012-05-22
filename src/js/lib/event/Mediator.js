@@ -20,7 +20,7 @@ define(['classify/Class', './EventsEmitter'], function (Class, EventsEmitter) {
             $extends: EventsEmitter,
 
             /**
-             *
+             * Class constructor.
              */
             initialize: function () {
                 if (!this.$self()._initializing) {
@@ -45,8 +45,10 @@ define(['classify/Class', './EventsEmitter'], function (Class, EventsEmitter) {
                 _initializing: false,
 
                 /**
-                *
-                */
+                 * Gets the shared instance.
+                 *
+                 * @return Mediator The mediator
+                 */
                 getInstance: function () {
                     if (this._instance === null) {
                         this._initializing = true;

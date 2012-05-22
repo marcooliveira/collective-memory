@@ -61,12 +61,14 @@ define([
         },
 
         /**
-         *
+         * {@inheritDoc}
          */
         destroy: function () {
+            this._element.removeClass('discovery-module');
+
             this._element.empty();
 
-            this._element.removeClass('discovery-module');
+            this.$super();
         }
     };
 

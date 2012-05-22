@@ -19,39 +19,46 @@ define([
         $borrows: EventsEmitter,
 
         /**
+         * Adds a broadcast event listener.
          *
+         * @see EventsEmitter#addListener
          */
         addBroadcastListener: function (name, func, context) {
             Mediator.getInstance().addListener.apply(Mediator.getInstance(), arguments);
         },
 
         /**
+         * Removes a broadcast event listener.
          *
+         * @see EventsEmitter#removeListener
          */
-        removeBroadcastListener: function (name, func, context) {
+        removeBroadcastListener: function (name, func) {
             Mediator.getInstance().removeListener.apply(Mediator.getInstance(), arguments);
         },
 
         /**
+         * Removes several broadcast event listeners.
          *
+         * @see EventsEmitter#removeListeners
          */
-        removeBroadcastListeners: function (name, func, context) {
+        removeBroadcastListeners: function (name) {
             Mediator.getInstance().removeListeners.apply(Mediator.getInstance(), arguments);
         },
 
         /**
+         * Broadcasts an event.
          *
+         * @see EventsEmitter#_fireEvent
          */
-        fireBroadcastEvent: function (name, func, context) {
+        fireBroadcastEvent: function (name, args) {
             Mediator.getInstance().fireEvent.apply(Mediator.getInstance(), arguments);
         },
 
-        $abstracts: {
-
-            /**
-             * Destroys the controller/module.
-             */
-            destroy: function () {}
+        /**
+         * Destroys the controller/module.
+         */
+        destroy: function () {
+            this.removeListeners();
         }
     };
 
