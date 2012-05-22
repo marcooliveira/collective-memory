@@ -15,7 +15,7 @@ define([
     './ApplicationView',
     'Header/HeaderController',
     'Footer/FooterController',
-    'Discovery/DiscoveryController',
+    'Discovery/DiscoveryController'
 ], function (Class, BaseController, $, mixIn, ApplicationView, HeaderController, FooterController, DiscoveryController) {
 
     'use strict';
@@ -53,10 +53,16 @@ define([
         },
 
         /**
-         *
+         * {@inheritDoc}
          */
         destroy: function () {
+            this._headerController.destroy();
+            this._footerController.destroy();
+            this._contentController.destroy();
 
+            this._view.destroy();
+
+            this.$super();
         },
 
         /**

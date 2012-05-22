@@ -4,50 +4,54 @@
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<title></title>
-	<meta name="description" content="">
-	<meta name="author" content="">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-	<meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width">
 
-	<link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.css">
 
-	<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
-	<script type="text/javascript" src="vendor/requirejs/require.js"></script>
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="vendor/requirejs/require.js"></script>
 </head>
 <body>
-	<script type="text/javascript">
-		var config = {
-				environment: 'dev',
-				debug: true
-			},
-			requirejs_config = {
-				baseUrl: 'js/modules',
-				paths: {
-					'lib':				 '../lib',
-					'order':             '../../vendor/requirejs/order',
-					'text':              '../../vendor/requirejs/text',
-					'jquery':            '../../vendor/jquery/jquery',
+    <script type="text/javascript">
+        var config = {
+                environment: 'dev',
+                debug: true
+            },
+            requirejs_config = {
+                baseUrl: 'js/modules',
+                paths: {
+                    'lib':                 '../lib',
+                    'order':             '../../vendor/requirejs/order',
+                    'text':              '../../vendor/requirejs/text',
+                    'jquery':            '../../vendor/jquery/jquery',
                     'jquery-ui':         '../../vendor/jquery-ui/jquery-ui.min',
-					'twitter-bootstrap': '../../vendor/twitter/bootstrap',
-					'amd-utils':         '../../vendor/amd-utils',
-					'classify':          '../../vendor/Classify/' + (config.environment == 'dev' ? 'strict' : 'loose'),
-					'doT':               '../../vendor/doT/doT',
-					'templates':         '../../templates'
-				},
-				priority: ['jquery'],
-				urlArgs: config.environment == 'dev' ? + new Date() : ''
-			}
-		;
+                    'twitter-bootstrap': '../../vendor/twitter/bootstrap',
+                    'amd-utils':         '../../vendor/amd-utils',
+                    'classify':          '../../vendor/Classify/' + (config.environment == 'dev' ? 'strict' : 'loose'),
+                    'doT':               '../../vendor/doT/doT',
+                    'templates':         '../../templates'
+                },
+                priority: ['jquery'],
+                urlArgs: config.environment == 'dev' ? + new Date() : ''
+            }
+        ;
 
-		requirejs.config(requirejs_config);
+        requirejs.config(requirejs_config);
 
-		require(['Application/ApplicationController'], function (ApplicationController) {
-			var appController = new ApplicationController(config);
-		});
-	</script>
+        require(['Application/ApplicationController'], function (ApplicationController) {
+            var appController = new ApplicationController(config);
+
+            /*setTimeout(function () {
+                appController.destroy();
+            }, 3000);*/
+        });
+    </script>
 </body>
 </html>

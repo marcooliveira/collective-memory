@@ -40,12 +40,12 @@ define([
             return this._element;
         },
 
-        $abstracts: {
-
-            /**
-             * Destroys the view.
-             */
-            destroy: function () {}
+        /**
+         * Destroys the view.
+         */
+        destroy: function () {
+            this.removeListeners();
+            this._element.children().remove();  // At this point, the element should have no elements! But if it does, then they will be all removed
         }
     };
 

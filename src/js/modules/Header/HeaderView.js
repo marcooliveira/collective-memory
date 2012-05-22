@@ -43,18 +43,20 @@ define([
                 range: true,
                 min: (new Date()).getFullYear() - 100,
                 max: (new Date()).getFullYear(),
-                values: [(new Date()).getFullYear() - 20, (new Date()).getFullYear() -5],
+                values: [(new Date()).getFullYear() - 20, (new Date()).getFullYear() - 5],
                 slide: this._handleSlideChange
             });
-
-            console.log(this._slider);
         },
 
         /**
-         *
+         * {@inheritDoc}
          */
         destroy: function () {
+            this._timeSpanElement.slider('destroy');
 
+            //this._element.empty();
+
+            this.$super();
         },
 
         /**

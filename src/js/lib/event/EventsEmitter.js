@@ -9,7 +9,11 @@
  *
  * @author André Cruz <andremiguelcruz@msn.com>
  */
-define(['classify/AbstractClass', 'amd-utils/lang/toArray'], function (AbstractClass, toArray) {
+define([
+    'classify/AbstractClass',
+    'amd-utils/lang/toArray',
+    'amd-utils/object/forOwn'
+], function (AbstractClass, toArray, forOwn) {
 
     'use strict';
 
@@ -24,6 +28,12 @@ define(['classify/AbstractClass', 'amd-utils/lang/toArray'], function (AbstractC
          * Adds a new event listener.
          * If the listener is already attached, it won't get duplicated.
          *
+         * If the event name string contains a period (.) character, then the event is namespaced.
+         * The period character separates the event from its namespace.
+         * For example, given click.sidebar will be decoded to click being the event name and sidebar its namespace.
+         *
+         * Namespacing allows us to unbind or trigger some events of a type without affecting others.
+         *
          * @param {String}   name      The event name
          * @param {Function} fn        The function
          * @param {Object}   [context] The context in which the function will be executed
@@ -31,10 +41,15 @@ define(['classify/AbstractClass', 'amd-utils/lang/toArray'], function (AbstractC
          * @return {mixed} The instance itself to allow chaining
          */
         addListener: function (name, fn, context) {
-            var events = this.__events[name] = this.__events[name] || [];
+            var info = this.__getEventInfo(name),
+                events = this.__events[info.name] = this.__events[info.name] || [];
 
-            if (this.__getListenerIndex(name, fn) === -1) {
-                events.push({ fn: fn, context: context });
+            if (!info.name) {
+                throw new Error('Please specify the event name.');
+            }
+
+            if (this.__getListenerIndex(info.name, fn) === -1) {
+                events.push({fn: fn, context: context, namespace: info.namespace });
             }
 
             return this;
@@ -42,19 +57,27 @@ define(['classify/AbstractClass', 'amd-utils/lang/toArray'], function (AbstractC
 
         /**
          * Removes an existent event listener.
+         * If the event is not namespaced then only the specified listener of the given event name will be removed.
+         * If the event name is namespaced then all the listeners of that namespace related to the name will be
+         * removed.
          *
          * @param {String}   name The event name
-         * @param {Function} fn   The function
+         * @param {Function} [fn] The function
          *
          * @return {mixed} The instance itself to allow chaining
          */
         removeListener: function (name, fn) {
-            var index = this.__getListenerIndex(name, fn);
+            var info = this.__getEventInfo(name),
+                index;
 
-            if (index !== -1) {
-                this.__events[name].splice(index, 1);
-                if (!this.__events[name].length) {
-                    delete this.__events[name];
+            if (this.__events[info.name]) {
+                if (info.namespace === null) {
+                    index = this.__getListenerIndex(info.name, fn);
+                    if (index !== -1) {
+                        this.__events[info.name].splice(index, 1);
+                    }
+                } else {
+                    this.__removeNamespacedEvents(this.__events[info.name], info.namespace);
                 }
             }
 
@@ -63,15 +86,31 @@ define(['classify/AbstractClass', 'amd-utils/lang/toArray'], function (AbstractC
 
         /**
          * Removes all listeners of the given name.
-         * If no type is specified, removes all events of all names.
+         * One can specify the namespace in the event name in order to only remove the listeners marked as
+         * the same namespace.
+         * Also, *.sidebar results in removing all the listeners within the sidebar namespace, leaving others intact.
          *
          * @param {String} [name] The event name
          *
          * @return {mixed} The instance itself to allow chaining
          */
         removeListeners: function (name) {
-            if (name) {
-                delete this.__events[name];
+            var info = name ? this.__getEventInfo(name) : null;
+
+            if (info) {
+                if (info.name) {
+                    if (this.__events[info.name]) {
+                        if (info.namespace === null) {
+                            delete this.__events[info.name];
+                        } else {
+                            this.__removeNamespacedEvents(this.__events[info.name], info.namespace);
+                        }
+                    }
+                } else if (info.namespace !== null) {
+                    forOwn(this.__events, function (value, key) {
+                        this.__removeNamespacedEvents(this.__events[key], info.namespace);
+                    }, this);
+                }
             } else {
                 this.__events = {};
             }
@@ -133,6 +172,43 @@ define(['classify/AbstractClass', 'amd-utils/lang/toArray'], function (AbstractC
             }
 
             return -1;
+        },
+
+        /**
+         * Parses the event name, returning an object with the event name and namespace.
+         *
+         * @return {Object} An object with the name and namespace of the event.
+         */
+        __getEventInfo: function (name) {
+            var pos = name.indexOf('.');
+
+            if (pos === -1) {
+                return {
+                    name: name === '*' ? null : name,
+                    namespace: null
+                };
+            }
+
+            return {
+                name: name.substr(0, pos),
+                namespace: name.substr(pos + 1)
+            };
+        },
+
+        /**
+         * Removes all the listeners with the specified namespace.
+         *
+         * @param {Array}  events    The array of listeners
+         * @param {String} namespace The namespace
+         */
+        __removeNamespacedEvents: function (events, namespace) {
+            var x;
+
+            for (x = events.length - 1; x >= 0; x -= 1) {
+                if (events[x].namespace === namespace) {
+                    events.splice(x, 1);
+                }
+            }
         }
     };
 

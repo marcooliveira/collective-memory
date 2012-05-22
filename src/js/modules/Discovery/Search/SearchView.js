@@ -37,10 +37,12 @@ define([
         },
 
         /**
-         *
+         * {@inheritDoc}
          */
         destroy: function () {
+            //this._element.empty();
 
+            this.$super();
         }
     };
 

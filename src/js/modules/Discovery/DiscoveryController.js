@@ -42,10 +42,12 @@ define([
         },
 
         /**
-         *
+         * {@inheritDoc}
          */
         destroy: function () {
+            this._view.destroy();
 
+            this.$super();
         }
     };
 

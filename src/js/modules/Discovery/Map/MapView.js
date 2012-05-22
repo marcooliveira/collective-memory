@@ -88,10 +88,14 @@ define([
         },
 
         /**
-         *
+         * {@inheritDoc}
          */
         destroy: function () {
+            this._map.destroy();
 
+            //this._element.empty();
+
+            this.$super();
         }
     };
 
