@@ -21,12 +21,14 @@ define([
     var MapView = {
         $name: 'MapView',
         $extends: BaseView,
-        $binds: ['_handleZoomChanged', '_handleCenterChanged', 'addMarker'],
+        $binds: ['_handleZoomChanged', '_handleCenterChanged', 'addMarker', '_handleUpdateViewportTimerTimeout'],
         $constants: {
             EVENT_CENTER_CHANGE: 'center_change',
             EVENT_ZOOM_CHANGE: 'zoom_change',
             EVENT_VIEWPORT_CHANGE: 'viewport_change'
         },
+
+        _viewportUpdateTimeout: 250,
 
         _options: {
             zoom: 15,
@@ -49,6 +51,8 @@ define([
                 position: google.maps.ControlPosition.LEFT_CENTER
             }
         },
+
+        _updateViewportTimerId: null,
 
         /**
          *
@@ -77,8 +81,6 @@ define([
               draggable: false,
               animation: google.maps.Animation.DROP
             });
-
-            console.log('adding marker', marker, this._map);
         },
 
         /**
@@ -93,28 +95,27 @@ define([
          *
          */
         _handleZoomChanged: function () {
-            var bounds = this._map.getBounds();
-            
-            console.log('zoom changed: ' + this._map.getZoom());
-
-            this._fireEvent(this.$self().EVENT_VIEWPORT_CHANGE,
-                {
-                    tl: {
-                        lat: bounds.getNorthEast().lat(),
-                        lng: bounds.getNorthEast().lng()
-                    },
-                    br: {
-                        lat: bounds.getSouthWest().lat(),
-                        lng: bounds.getSouthWest().lng()
-                    }
-                }
-            );
+            this.updateViewport();
         },
 
         /**
          *
          */
         _handleCenterChanged: function () {
+            this.updateViewport();
+        },
+
+        updateViewport: function () {
+            if (this._updateViewportTimerId !== null) {
+                clearTimeout(this._updateViewportTimerId);
+            }
+
+            this._updateViewportTimerId = setTimeout(this._handleUpdateViewportTimerTimeout, this._viewportUpdateTimeout);
+        },
+
+        _handleUpdateViewportTimerTimeout: function () {
+            this._updateViewportTimerId = null;
+
             var bounds = this._map.getBounds();
 
             console.log('center changed: lat = ' + this._map.getCenter().lat() + ' lng = ' + this._map.getCenter().lng());

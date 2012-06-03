@@ -31,6 +31,10 @@ define([
             this._mockGetMemory(tl, br, options, callback);
         },
 
+        getTags: function (tl, br, callback) {
+            
+        },
+
         _mockGetMemory: function (tl, br, options, callback) {
             var total = Math.floor(Math.random() * 50),
                 x,
