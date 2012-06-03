@@ -28,15 +28,16 @@
                 baseUrl: 'js/modules',
                 paths: {
                     'lib':                 '../lib',
-                    'order':             '../../vendor/requirejs/order',
-                    'text':              '../../vendor/requirejs/text',
-                    'jquery':            '../../vendor/jquery/jquery',
-                    'jquery-ui':         '../../vendor/jquery-ui/jquery-ui.min',
-                    'twitter-bootstrap': '../../vendor/twitter/bootstrap',
-                    'amd-utils':         '../../vendor/amd-utils',
-                    'classify':          '../../vendor/Classify/' + (config.environment == 'dev' ? 'strict' : 'loose'),
-                    'doT':               '../../vendor/doT/doT',
-                    'templates':         '../../templates'
+                    'order':               '../../vendor/requirejs/order',
+                    'text':                '../../vendor/requirejs/text',
+                    'jquery':              '../../vendor/jquery/jquery',
+                    'jquery-ui':           '../../vendor/jquery-ui/jquery-ui.min',
+                    'twitter-bootstrap':   '../../vendor/twitter/bootstrap',
+                    'amd-utils':           '../../vendor/amd-utils',
+                    'classify':            '../../vendor/Classify/' + (config.environment == 'dev' ? 'strict' : 'loose'),
+                    'doT':                 '../../vendor/doT/doT',
+                    'vendor':              '../../vendor',
+                    'templates':           '../../templates'
                 },
                 priority: ['jquery'],
                 urlArgs: config.environment == 'dev' ? + new Date() : ''

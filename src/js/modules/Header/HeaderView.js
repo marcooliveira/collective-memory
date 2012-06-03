@@ -41,6 +41,7 @@ define([
             this._timeSpanElement.slider({
                 orientation: 'horizontal',
                 range: true,
+                // TODO: the date below should come from the backend
                 min: (new Date()).getFullYear() - 100,
                 max: (new Date()).getFullYear(),
                 values: [(new Date()).getFullYear() - 20, (new Date()).getFullYear() - 5],

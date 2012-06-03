@@ -20,6 +20,7 @@ define([
     var DiscoveryView = {
         $name: 'DiscoveryView',
         $extends: BaseView,
+        
 
         _searchElement: null,
         _mapElement: null,

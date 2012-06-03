@@ -18,6 +18,7 @@ define([
     var SearchController = {
         $name: 'SearchController',
         $extends: BaseController,
+        $binds: ['_handleQuerySearchChanged'],
 
         _view: null,
 
@@ -28,6 +29,23 @@ define([
             console.log('search construct', element);
 
             this._view = new SearchView(element);
+
+            this._view.addListener(SearchView.EVENT_QUERY_CHANGE, this._handleQuerySearchChanged);
+        },
+
+        _handleQuerySearchChanged: function (query) {
+            console.log('search query changed:', query);
+
+            this._view.setTags([
+                {
+                    weight: 7,
+                    name: 'Aveiro'
+                },
+                {
+                    weight: 4,
+                    name: 'Universidade'
+                }
+            ]);
         },
 
         /**

@@ -16,3 +16,6 @@
 [submodule "vendor/amd-utils"]
 	path = vendor/amd-utils
 	url = git@github.com:millermedeiros/amd-utils.git
+[submodule "vendor/addywaddy/jquery.tagcloud.js"]
+	path = vendor/addywaddy/jquery.tagcloud.js
+	url = git://github.com/addywaddy/jquery.tagcloud.js.git

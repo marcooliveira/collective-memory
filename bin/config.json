@@ -103,6 +103,13 @@
 			"src": "../vendor/Classify/dist/amd",
 			"dst": "../web/vendor/Classify/",
 			"type": "dir"
+		},
+
+		{
+			"title": "addywaddy tagcloud",
+			"src": "../vendor/addywaddy/jquery.tagcloud.js/jquery.tagcloud.js",
+			"dst": "../web/vendor/addywaddy/tagcloud.js",
+			"type": "file"
 		}
 	]
 }
