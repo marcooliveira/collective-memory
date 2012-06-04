@@ -44,8 +44,6 @@ define([
 
             this._view.addListener(MapView.EVENT_VIEWPORT_CHANGE, this._handleViewportChanged);
             this._view.addListener(MapView.EVENT_MEMORY_CLICK, this._handleMemoryClick);
-
-            this.expandView();
         },
 
         /**
