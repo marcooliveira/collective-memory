@@ -181,6 +181,13 @@ define([
             return this;
         },
 
+        /**
+         * {@inheritDoc}
+         */
+        fireEvent: function (event, args) {
+            return this._fireEvent.apply(this, arguments);
+        },
+
         // protected methods
 
         /**

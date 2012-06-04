@@ -35,7 +35,7 @@
 #content.discovery-module .map-module {
     background: grey;
     left: 200px;
-    right: 200px;
+    right: 250px;
 
     @include single-transition(right, 0.4s, ease-in-out);
 
@@ -59,13 +59,62 @@
 }
 
 #content.discovery-module .overview-module {
-    background: green;
-    right: 0px;
-    width: 0px;
+    background: white;
+    right: -250px;
+    width: 240px;
+    overflow: hidden;
+    padding: 5px;
 
-    @include single-transition(width, 0.4s, ease-in-out);
+    @include single-transition(right, 0.4s, ease-in-out);
 
     &.expanded {
-        width: 200px;
+        right: 0;
+    }
+
+    .header {
+        .hide-btn {
+            float: left;
+        }
+
+        .header-title {
+            float: right;
+            font-weight: bold;
+            font-size: 20px;
+         }
+    }
+
+    .top-contributions {
+        margin: 10px 0;
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        li {
+            padding: 0px;
+            float: left;
+        }
+
+        .thumbnail {
+            width: 60px;
+            height: 60px;
+        }
+
+        .create-new {
+            margin-top: 10px;
+            float: right;
+        }
+    }
+
+    .all-contributions {
+        border-top: 1px solid #444;
+        padding-top: 10px;
+        
+        .header-title {
+            font-weight: bold;
+            font-size: 18px;
+        }
     }
 }

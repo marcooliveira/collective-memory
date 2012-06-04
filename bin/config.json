@@ -23,6 +23,12 @@
 			"type": "dir"
 		},
 
+		{
+			"title": "data dir",
+			"src": "../src/data",
+			"dst": "../web/data",
+			"type": "dir"
+		},
 
 		{
 			"title": "AMD-Utils",

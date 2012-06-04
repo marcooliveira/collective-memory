@@ -15,7 +15,7 @@ define([
     './Map/MapController',
     './Map/MapView',
     './Overview/OverviewController',
-    './Overview/OverviewView',
+    './Overview/OverviewView'
 ], function (Class, BaseController, DiscoveryView, SearchController, MapController, MapView, OverviewController, OverviewView) {
 
     'use strict';
@@ -50,9 +50,10 @@ define([
         /**
          *
          */
-        showMemoryDetails: function () {
+        showMemoryDetails: function (memoryId) {
             this._mapController.collapseView();
             this._overviewController.expandView();
+            this._overviewController.setCurrentMemory(1 /*memoryId*/); // TODO: change this later
         },
 
         /**
