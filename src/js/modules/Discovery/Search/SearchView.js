@@ -13,8 +13,9 @@ define([
     'jquery',
     'doT',
     'vendor/addywaddy/tagcloud',
-    'text!templates/Discovery/Search/structure.html'
-], function (Class, BaseView, $, doT, tagcloud_dummy, structureTemplate) {
+    'text!templates/Discovery/Search/structure.html',
+    'text!templates/Discovery/Search/tag.html'
+], function (Class, BaseView, $, doT, tagcloud_dummy, structureTemplate, tagTemplate) {
 
     'use strict';
 
@@ -93,15 +94,24 @@ define([
                 tagsElement = this._getTagsElement(),
                 newElement;
 
-            tagsElement.html('');
+            tagsElement.fadeOut(100, function () {
+                tagsElement.html('');
 
-            for (i = 0; i < total; i = i + 1) {
-                newElement = '<a href="#" rel="' + tags[i].weight + '">' + tags[i].name + '</a>';
-                tagsElement.append(newElement);
-            }
+                for (i = 0; i < total; i = i + 1) {
+                    tagsElement.append(doT.compile(tagTemplate)(
+                        {
+                            weight: tags[i].weight,
+                            link: '#',
+                            name: tags[i].name
+                        }
+                    ));
+                }
 
-            $(function () {
-                $('.search-tags a').tagcloud();
+                $(function () {
+                    $('.search-tags a').tagcloud();
+                });
+
+                tagsElement.fadeIn(100);
             });
         },
 
