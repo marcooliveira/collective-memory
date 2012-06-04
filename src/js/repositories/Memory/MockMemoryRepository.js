@@ -9,19 +9,43 @@
  */
 define([
     'classify/Class',
-    'lib/math/MathUtils'
-], function (Class, MathUtils) {
+    'lib/math/MathUtils',
+    './MemoryRepositoryInterface'
+], function (Class, MathUtils, MemoryRepositoryInterface) {
 
     'use strict';
 
     var MemoryRepository = {
         $name: 'MemoryRepository',
+        $implements: MemoryRepositoryInterface,
 
         /**
          *
          */
         initialize: function () {
             console.log('MemoryRepository initialized');
+        },
+
+        /**
+         *
+         */
+        getMemories: function(tl, br, $filters) {
+            return new ApiRequest('/data/memories.json')
+                .addListener('success', function (response) {
+                    var memories = response.content,
+                        x;
+
+                    for (x = memories.length - 1; x >= 0; x -= 1) {
+                        // If the memory does not meet the square positions and/or filters, remove it with splice().
+                    }
+                });
+        },
+
+        /**
+         *
+         */
+        getMemoryDetails: function (id) {
+
         },
 
         /**
