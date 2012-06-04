@@ -20,6 +20,13 @@ define([
     var OverviewView = {
         $name: 'OverviewView',
         $extends: BaseView,
+        $constants: {
+            EVENT_HIDE_CLICK: 'hide_click'
+        },
+        $binds: [
+            '_handleHideBtnClick'
+        ],
+        _hideBtnElement: null,
 
         /**
          *
@@ -28,13 +35,40 @@ define([
             this.$super(element);
 
             this._element.html(doT.compile(structureTemplate)());
+
+            this._hideBtnElement = this._element.find('.header .hide-btn');
+            this._hideBtnElement.on('click', this._handleHideBtnClick);
+        },
+
+        /**
+         *
+         */
+        expand: function () {
+            this._element.addClass('expanded');
+        },
+
+        /**
+         *
+         */
+        collapse: function () {
+            this._element.removeClass('expanded');
+        },
+
+        /**
+         *
+         */
+        _handleHideBtnClick: function () {
+            console.log('hide click');
+            this._fireEvent(this.$self().EVENT_HIDE_CLICK);
         },
 
         /**
          * {@inheritDoc}
          */
         destroy: function () {
-            //this._element.empty();
+            this._hideBtnElement.off('click', this._handleHideBtnClick);
+
+            this._element.empty();
 
             this.$super();
         }

@@ -21,11 +21,17 @@ define([
     var MapView = {
         $name: 'MapView',
         $extends: BaseView,
-        $binds: ['_handleZoomChanged', '_handleCenterChanged', 'addMarker', '_handleUpdateViewportTimerTimeout'],
+        $binds: [
+            '_handleZoomChanged',
+            '_handleCenterChanged',
+            '_handleUpdateViewportTimerTimeout',
+            '_handleMarkerClick'
+        ],
         $constants: {
             EVENT_CENTER_CHANGE: 'center_change',
             EVENT_ZOOM_CHANGE: 'zoom_change',
             EVENT_VIEWPORT_CHANGE: 'viewport_change',
+            EVENT_MEMORY_CLICK: 'memory_click',
             VIEWPORT_UPDATE_TIMEOUT: 250
         },
 
@@ -50,8 +56,10 @@ define([
                 position: google.maps.ControlPosition.LEFT_CENTER
             }
         },
+        _markers: {},
 
         _updateViewportTimerId: null,
+
 
         /**
          *
@@ -73,13 +81,50 @@ define([
             this._enableListeners();
         },
 
-        addMarker: function (title, position) {
+        /**
+         *
+         */
+        addMarker: function (memory) {
             var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(position.lat, position.lng),
+                position: new google.maps.LatLng(memory.position.lat, memory.position.lng),
                 map: this._map,
                 draggable: false,
                 animation: null //google.maps.Animation.DROP
             });
+
+            this._markers[memory.id] = marker;
+            marker.memoryId = memory.id;
+            marker.listener = google.maps.event.addListener(marker, 'click', this._handleMarkerClick);
+        },
+
+        /**
+         *
+         */
+        removeMarker: function (memory) {
+            var marker = this._markers[memory.id];
+
+            if (marker) {
+                marker.setMap(null);
+                google.maps.event.removeListener(marker.listener);
+                delete marker.listener;
+                delete marker.memoryId;
+
+                delete this._markers[memory.id];
+            }
+        },
+
+        /**
+         *
+         */
+        expand: function () {
+            this._element.addClass('expanded');
+        },
+
+        /**
+         *
+         */
+        collapse: function () {
+            this._element.removeClass('expanded');
         },
 
         /**
@@ -104,6 +149,9 @@ define([
             this.updateViewport();
         },
 
+        /**
+         *
+         */
         updateViewport: function () {
             if (this._updateViewportTimerId !== null) {
                 clearTimeout(this._updateViewportTimerId);
@@ -112,6 +160,9 @@ define([
             this._updateViewportTimerId = setTimeout(this._handleUpdateViewportTimerTimeout, this.$self().VIEWPORT_UPDATE_TIMEOUT);
         },
 
+        /**
+         *
+         */
         _handleUpdateViewportTimerTimeout: function () {
             this._updateViewportTimerId = null;
 
@@ -131,6 +182,14 @@ define([
                         lng: bounds.getSouthWest().lng()
                     }
                 });
+        },
+
+        /**
+         *
+         */
+        _handleMarkerClick: function (marker) {
+            console.log('memory clicked', marker.memoryId);
+            this._fireEvent(this.$self().EVENT_MEMORY_CLICK, marker.memoryId);
         },
 
         /**

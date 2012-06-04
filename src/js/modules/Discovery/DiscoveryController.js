@@ -13,14 +13,17 @@ define([
     './DiscoveryView',
     './Search/SearchController',
     './Map/MapController',
-    './Overview/OverviewController'
-], function (Class, BaseController, DiscoveryView, SearchController, MapController, OverviewController) {
+    './Map/MapView',
+    './Overview/OverviewController',
+    './Overview/OverviewView',
+], function (Class, BaseController, DiscoveryView, SearchController, MapController, MapView, OverviewController, OverviewView) {
 
     'use strict';
 
     var DiscoveryController = {
         $name: 'DiscoveryController',
         $extends: BaseController,
+        $binds: ['hideMemoryDetails', 'showMemoryDetails'],
 
         _view: null,
 
@@ -39,6 +42,25 @@ define([
             this._searchController = new SearchController(this._view.getSearchElement());
             this._mapController = new MapController(this._view.getMapElement());
             this._overviewController = new OverviewController(this._view.getOverviewElement());
+
+            this._mapController.addListener(MapView.EVENT_MEMORY_CLICK, this.showMemoryDetails);
+            this._overviewController.addListener(OverviewView.EVENT_HIDE_CLICK, this.hideMemoryDetails);
+        },
+
+        /**
+         *
+         */
+        showMemoryDetails: function () {
+            this._mapController.collapseView();
+            this._overviewController.expandView();
+        },
+
+        /**
+         *
+         */
+        hideMemoryDetails: function () {
+            this._mapController.expandView();
+            this._overviewController.collapseView();
         },
 
         /**

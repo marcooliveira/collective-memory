@@ -1,3 +1,5 @@
+@import "compass/css3/transition";
+
 #content.discovery-module .search-module {
     width: 200px;
     background-image: image-url('discovery/search-module/bg.png');
@@ -10,7 +12,7 @@
     .search-tags {
         margin: 8px;
         text-align: center;
-        
+
         a {
             padding-right: 5px;
         }
@@ -18,9 +20,15 @@
 }
 
 #content.discovery-module .map-module {
-    background: light-grey;
+    background: grey;
     left: 200px;
-    right: 0px;
+    right: 200px;
+
+    @include single-transition(right, 0.4s, ease-in-out);
+
+    &.expanded {
+        right: 0px;
+    }
 
     .search-input {
         position: absolute;
@@ -34,5 +42,17 @@
         img {
             max-width: none;
         }
+    }
+}
+
+#content.discovery-module .overview-module {
+    background: green;
+    right: 0px;
+    width: 0px;
+
+    @include single-transition(width, 0.4s, ease-in-out);
+
+    &.expanded {
+        width: 200px;
     }
 }
