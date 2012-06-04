@@ -12,8 +12,9 @@ define([
     'BaseView',
     'jquery',
     'doT',
-    'text!templates/Discovery/Overview/structure.html'
-], function (Class, BaseView, $, doT, structureTemplate) {
+    'text!templates/Discovery/Overview/structure.html',
+    'text!templates/Discovery/Overview/top_contributions.html'
+], function (Class, BaseView, $, doT, structureTemplate, topContributionsTemplate) {
 
     'use strict';
 
@@ -26,7 +27,12 @@ define([
         $binds: [
             '_handleHideBtnClick'
         ],
+
         _hideBtnElement: null,
+        _contentElement: null,
+        _loaderElement: null,
+
+        _topContributionsTemplate: null,
 
         /**
          *
@@ -38,6 +44,35 @@ define([
 
             this._hideBtnElement = this._element.find('.header .hide-btn');
             this._hideBtnElement.on('click', this._handleHideBtnClick);
+
+            this._loaderElement = this._element.find('.loader');
+            this._contentElement = this._element.find('.content');
+
+            this._topContributionsTemplate = doT.compile(topContributionsTemplate);
+        },
+
+        /**
+         *
+         */
+        setAsLoading: function () {
+            this._loaderElement.show();
+            this._contentElement.hide();
+        },
+
+        /**
+         *
+         */
+        unsetAsLoading: function () {
+            this._loaderElement.hide();
+            this._contentElement.show();
+        },
+
+        /**
+         *
+         */
+        setTopContributions: function (contributions) {
+            var html = this._topContributionsTemplate({ contributions: contributions });
+            this._contentElement.find('.top-contributions').html(html);
         },
 
         /**

@@ -1,0 +1,17 @@
+{
+    "status": 1,
+    "content": {
+        "total": 20,
+        "contributions": [
+            {
+                "id": 1,
+                "name": "Some Contribution",
+                "description": "Some Description",
+                "insertion_date": "2012-05-08 19:00:00",
+                "nr_comments": 0,
+                "image_small": "http://google.com",
+                "like_counter": 50
+            }
+        ]
+    }
+}

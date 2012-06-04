@@ -10,42 +10,34 @@
 define([
     'classify/Class',
     'lib/math/MathUtils',
-    './MemoryRepositoryInterface'
-], function (Class, MathUtils, MemoryRepositoryInterface) {
+    './MemoryRepositoryInterface',
+    'lib/request/ApiRequest'
+], function (Class, MathUtils, MemoryRepositoryInterface, ApiRequest) {
 
     'use strict';
 
-    var MemoryRepository = {
-        $name: 'MemoryRepository',
+    var MockMemoryRepository = {
+        $name: 'MockMemoryRepository',
         $implements: MemoryRepositoryInterface,
 
         /**
          *
          */
-        initialize: function () {
-            console.log('MemoryRepository initialized');
-        },
-
-        /**
-         *
-         */
         getMemories: function(tl, br, $filters) {
-            return new ApiRequest('/data/memories.json')
-                .addListener('success', function (response) {
-                    var memories = response.content,
+            return new ApiRequest('/data/memories/memories.json')
+                .addListener('success', function (content) {
+                    var memories = content.memories,
                         x;
 
                     for (x = memories.length - 1; x >= 0; x -= 1) {
                         // If the memory does not meet the square positions and/or filters, remove it with splice().
                     }
+
+                    this.fireEvent('fetch_success', memories, content.total);
+                })
+                .addListener('error', function (error) {
+                    this.fireEvent('fetch_error', error);
                 });
-        },
-
-        /**
-         *
-         */
-        getMemoryDetails: function (id) {
-
         },
 
         /**
@@ -97,12 +89,13 @@ define([
         },
 
         _mockGetMemory: function (tl, br, options, callback) {
-            var total = MathUtils.rand(5, 20),
+            var total = Math.round(MathUtils.rand(5, 20)),
                 x,
                 markers = [];
 
             for (x = total - 1; x >= 0; x -= 1) {
                 markers.push({
+                    id: x,
                     title: 'Some Memory Title ' + x,
                     position: {
                         lat: MathUtils.rand(tl.lat, br.lat),
@@ -114,15 +107,8 @@ define([
             setTimeout(function () {
                 callback.call(null, markers);
             }, MathUtils.rand(50, 400));
-        },
-
-        /**
-         *
-         */
-        destroy: function () {
-
         }
     };
 
-    return new Class(MemoryRepository);
+    return new Class(MockMemoryRepository);
 });

@@ -1,0 +1,27 @@
+{
+    status: 1,
+    content: {
+        "total": 2,
+        "memories": [
+            {
+                "id": 1,
+                "name": "Some memory title",
+                "position": {
+                    "lat": 7.002,
+                    "lng": 50.002
+                },
+                "tags": [
+                    {
+                        "weight": 5,
+                        "name": "aveiro"
+                    }
+                ],
+
+                "image_small": "http://google.com",
+                "nr_stories": 20,
+                "memory_date": "2012-05-08 19:00:00",
+                "insertion_date": "2012-05-08 19:00:00"
+            }
+        ]
+    }
+}

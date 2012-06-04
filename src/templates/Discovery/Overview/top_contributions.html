@@ -1,0 +1,12 @@
+{{ var length = it.contributions.length; }}
+{{ if (length > 0) { }}
+<ul>
+    {{ for (x = 0; x < length; x += 1) { }}
+    <li class="thumbnail"><img src="{{= it.contributions[x].image_small }}" alt="" /></li>
+    {{ } }}
+</ul>
+
+<div class="clearfix"></div>
+<div class="create-new btn btn-small">Leave my contribution</div>
+<div class="clearfix"></div>
+{{ } }}
