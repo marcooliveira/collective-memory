@@ -2,7 +2,7 @@
 /*global define, google*/
 
 /**
- * MemoryRepository class.
+ * Math utils.
  *
  * @author André Cruz <andremiguelcruz@msn.com>
  * @author Marco Oliveira <marcooliveira@ua.pt>

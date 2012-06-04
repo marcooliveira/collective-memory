@@ -44,10 +44,14 @@ define([
         initialize: function (config) {
             mixIn(this._config, config);
 
+            this._container.setParameter('debug', this._config.debug);
+            this._container.setParameter('environment', this._config.environment);
+
             this._view = new ApplicationView($(document.body));
 
             this._headerController = new HeaderController(this._view.getHeader());
             this._footerController = new FooterController(this._view.getFooter());
+
 
             this._readHash();
         },
@@ -61,6 +65,8 @@ define([
             this._contentController.destroy();
 
             this._view.destroy();
+
+            this._container.clear();
 
             this.$super();
         },

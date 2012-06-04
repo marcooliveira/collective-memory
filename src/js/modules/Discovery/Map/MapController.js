@@ -11,8 +11,8 @@ define([
     'classify/Class',
     'BaseController',
     './MapView',
-    'Discovery/MemoryRepository'
-], function (Class, BaseController, MapView, MemoryRepository) {
+    'repositories/Memory/MemoryRepositoryFactory'
+], function (Class, BaseController, MapView, MemoryRepositoryFactory) {
 
     'use strict';
 
@@ -26,13 +26,16 @@ define([
         ],
 
         _view: null,
-        _memoryRepository: new MemoryRepository(),
+        _memoryRepository: null,
 
         /**
          * Constructor.
          */
         initialize: function (element) {
+
             console.log('map construct', element);
+
+            this._memoryRepository = MemoryRepositoryFactory.getInstance();
 
             this._view = new MapView(element, {
                 zoom: 15,

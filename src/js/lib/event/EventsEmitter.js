@@ -132,7 +132,8 @@ define([
             var events = this.__events[name],
                 params = toArray(arguments),
                 x,
-                length;
+                length,
+                ret;
 
             params.shift();
 
@@ -141,7 +142,10 @@ define([
 
                 for (x = 0; x < length; x += 1) {
                     try {
-                        events[x].fn.apply(events[x].context || this, params);
+                        ret = events[x].fn.apply(events[x].context || this, params);
+                        if (ret === false) {
+                            break;
+                        }
                     } finally {}
                 }
             }

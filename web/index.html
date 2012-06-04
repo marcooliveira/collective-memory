@@ -21,20 +21,22 @@
 <body>
     <script type="text/javascript">
         var config = {
-                environment: 'dev',
+                environment: 'test',
                 debug: true
             },
             requirejs_config = {
                 baseUrl: 'js/modules',
                 paths: {
                     'lib':                 '../lib',
+                    'repositories':        '../repositories',
+                    'modules':             '.',
                     'order':               '../../vendor/requirejs/order',
                     'text':                '../../vendor/requirejs/text',
                     'jquery':              '../../vendor/jquery/jquery',
                     'jquery-ui':           '../../vendor/jquery-ui/jquery-ui.min',
                     'twitter-bootstrap':   '../../vendor/twitter/bootstrap',
                     'amd-utils':           '../../vendor/amd-utils',
-                    'classify':            '../../vendor/Classify/' + (config.environment == 'dev' ? 'strict' : 'loose'),
+                    'classify':            '../../vendor/Classify/' + (config.environment == 'prod' ? 'loose' : 'strict'),
                     'doT':                 '../../vendor/doT/doT',
                     'vendor':              '../../vendor',
                     'templates':           '../../templates'
@@ -46,7 +48,8 @@
 
         requirejs.config(requirejs_config);
 
-        require(['Application/ApplicationController'], function (ApplicationController) {
+        require(['modules/Application/ApplicationController'], function (ApplicationController) {
+            console.log('Starting application..');
             var appController = new ApplicationController(config);
 
             /*setTimeout(function () {

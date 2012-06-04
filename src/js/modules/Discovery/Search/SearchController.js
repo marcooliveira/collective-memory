@@ -11,8 +11,8 @@ define([
     'classify/Class',
     'BaseController',
     './SearchView',
-    'Discovery/MemoryRepository'
-], function (Class, BaseController, SearchView, MemoryRepository) {
+    'repositories/Memory/MemoryRepositoryFactory'
+], function (Class, BaseController, SearchView, MemoryRepositoryFactory) {
 
     'use strict';
 
@@ -23,16 +23,19 @@ define([
 
         _view: null,
 
-        _memoryRepository: new MemoryRepository(),
+        _memoryRepository: null,
 
         /**
          * Constructor.
          */
         initialize: function (element) {
+            this.$super();
+            
             console.log('search construct', element);
 
-            this._view = new SearchView(element);
+            this._memoryRepository = MemoryRepositoryFactory.getInstance();
 
+            this._view = new SearchView(element);
             this._view.addListener(SearchView.EVENT_QUERY_CHANGE, this._handleQuerySearchChanged);
         },
 

@@ -8,15 +8,18 @@
  */
 define([
     'classify/AbstractClass',
+    'lib/dependency_injection/Container',
     'lib/event/EventsEmitter',
     'lib/event/Mediator'
-], function (AbstractClass, EventsEmitter, Mediator) {
+], function (AbstractClass, Container, EventsEmitter, Mediator) {
 
     'use strict';
 
     var BaseController = {
         $name: 'BaseController',
         $borrows: EventsEmitter,
+
+        _container: Container.getInstance(),
 
         /**
          * Adds a broadcast event listener.
