@@ -21,15 +21,18 @@ define([
     var SearchView = {
         $name: 'SearchView',
         $extends: BaseView,
-        $binds: ['_handleSearchQueryChanged'],
+        $binds: ['_handleSearchQueryChanged', '_handleQueryChangedTimerTimeout'],
         $constants: {
-            EVENT_QUERY_CHANGE: 'query_change'
+            EVENT_QUERY_CHANGE: 'query_change',
+            QUERY_CHANGE_TIMEOUT: 300
         },
 
         _searchElement: null,
         _highlightsElement: null,
 
         _previousSearch: '',
+
+        _queryChangedTimerId: null,
 
         /**
          *
@@ -53,13 +56,27 @@ define([
 
 
         _handleSearchQueryChanged: function (eventObject) {
-            if (this._previousSearch !== eventObject.srcElement.value) {
-                // store new previous value
-                this._previousSearch = this.getQuerySearchValue();
-
-                // dispatch query change event
-                this._fireEvent(this.$self().EVENT_QUERY_CHANGE, this._previousSearch);
+            if (this._queryChangedTimerId !== null) {
+                clearTimeout(this._queryChangedTimerId);
             }
+
+            if (this._previousSearch !== eventObject.srcElement.value) {
+                this._queryChangedTimerId = setTimeout(this._handleQueryChangedTimerTimeout, this.$self().QUERY_CHANGE_TIMEOUT);
+            }
+        },
+
+        _handleQueryChangedTimerTimeout: function () {
+            this._queryChangedTimerId = null;
+
+            // store new previous value
+            this._previousSearch = this.getQuerySearchValue();
+
+            // dispatch query change event
+            this._fireEvent(this.$self().EVENT_QUERY_CHANGE, {
+                query: this._previousSearch,
+                tl: 0, // TODO: change to the map top left and bottom right coords
+                br: 0
+            });
         },
 
         _getTagsElement: function () {
@@ -76,7 +93,7 @@ define([
                 tagsElement = this._getTagsElement(),
                 newElement;
 
-                tagsElement.html('');
+            tagsElement.html('');
 
             for (i = 0; i < total; i = i + 1) {
                 newElement = '<a href="#" rel="' + tags[i].weight + '">' + tags[i].name + '</a>';

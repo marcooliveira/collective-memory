@@ -25,10 +25,9 @@ define([
         $constants: {
             EVENT_CENTER_CHANGE: 'center_change',
             EVENT_ZOOM_CHANGE: 'zoom_change',
-            EVENT_VIEWPORT_CHANGE: 'viewport_change'
+            EVENT_VIEWPORT_CHANGE: 'viewport_change',
+            VIEWPORT_UPDATE_TIMEOUT: 250
         },
-
-        _viewportUpdateTimeout: 250,
 
         _options: {
             zoom: 15,
@@ -76,10 +75,10 @@ define([
 
         addMarker: function (title, position) {
             var marker = new google.maps.Marker({
-              position: new google.maps.LatLng(position.lat, position.lng),
-              map: this._map,
-              draggable: false,
-              animation: google.maps.Animation.DROP
+                position: new google.maps.LatLng(position.lat, position.lng),
+                map: this._map,
+                draggable: false,
+                animation: null //google.maps.Animation.DROP
             });
         },
 
@@ -110,7 +109,7 @@ define([
                 clearTimeout(this._updateViewportTimerId);
             }
 
-            this._updateViewportTimerId = setTimeout(this._handleUpdateViewportTimerTimeout, this._viewportUpdateTimeout);
+            this._updateViewportTimerId = setTimeout(this._handleUpdateViewportTimerTimeout, this.$self().VIEWPORT_UPDATE_TIMEOUT);
         },
 
         _handleUpdateViewportTimerTimeout: function () {
@@ -131,8 +130,7 @@ define([
                         lat: bounds.getSouthWest().lat(),
                         lng: bounds.getSouthWest().lng()
                     }
-                }
-            );
+                });
         },
 
         /**

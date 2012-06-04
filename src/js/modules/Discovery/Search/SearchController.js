@@ -10,17 +10,20 @@
 define([
     'classify/Class',
     'BaseController',
-    './SearchView'
-], function (Class, BaseController, SearchView) {
+    './SearchView',
+    'Discovery/MemoryRepository'
+], function (Class, BaseController, SearchView, MemoryRepository) {
 
     'use strict';
 
     var SearchController = {
         $name: 'SearchController',
         $extends: BaseController,
-        $binds: ['_handleQuerySearchChanged'],
+        $binds: ['_handleQuerySearchChanged', '_handleGetTagSuccess'],
 
         _view: null,
+
+        _memoryRepository: new MemoryRepository(),
 
         /**
          * Constructor.
@@ -33,19 +36,14 @@ define([
             this._view.addListener(SearchView.EVENT_QUERY_CHANGE, this._handleQuerySearchChanged);
         },
 
-        _handleQuerySearchChanged: function (query) {
-            console.log('search query changed:', query);
+        _handleQuerySearchChanged: function (queryInfo) {
+            console.log('search query changed:', queryInfo);
 
-            this._view.setTags([
-                {
-                    weight: 7,
-                    name: 'Aveiro'
-                },
-                {
-                    weight: 4,
-                    name: 'Universidade'
-                }
-            ]);
+            this._memoryRepository.getTag(queryInfo.tl, queryInfo.br, this._handleGetTagSuccess);
+        },
+
+        _handleGetTagSuccess: function (tags) {
+            this._view.setTags(tags);
         },
 
         /**

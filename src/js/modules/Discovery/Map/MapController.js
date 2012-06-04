@@ -54,7 +54,7 @@ define([
                 setTimeout(function (i) {
                     var marker = markers[i];
                     addMarker(marker.title, marker.position);
-                }.bind(null, i), i * 200);
+                }.bind(null, i), i * 20);
             }
         },
 
