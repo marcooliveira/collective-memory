@@ -1,4 +1,4 @@
-@import "compass/css3/transition";
+@import "compass/css3";
 
 #content.discovery-module .search-module {
     width: 200px;
@@ -15,6 +15,19 @@
 
         a {
             padding-right: 5px;
+            text-decoration: none;
+            @include opacity(0.5);
+
+            @include single-text-shadow(#000,1px,1px,0);
+
+            &.selected {
+                @include opacity(1);
+            }
+
+            &:hover {
+                text-decoration: none;
+                color: #FFFFFF !important;
+            }
         }
     }
 }

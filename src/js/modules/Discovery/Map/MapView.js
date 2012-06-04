@@ -79,6 +79,8 @@ define([
             this._map = new google.maps.Map(this._mapElement.get(0), this._mapOptions);
 
             this._enableListeners();
+
+            this.updateViewport();
         },
 
         /**

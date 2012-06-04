@@ -22,10 +22,15 @@ define([
     var SearchView = {
         $name: 'SearchView',
         $extends: BaseView,
-        $binds: ['_handleSearchQueryChanged', '_handleQueryChangedTimerTimeout'],
+        $binds: ['_handleSearchQueryChanged', '_handleQueryChangedTimerTimeout', '_handleTagClick'],
         $constants: {
             EVENT_QUERY_CHANGE: 'query_change',
-            QUERY_CHANGE_TIMEOUT: 300
+            QUERY_CHANGE_TIMEOUT: 300,
+            TAGS_FADEOUT_TIME: 100,
+            TAGS_START_SIZE: 10,
+            TAGS_END_SIZE: 18,
+            TAGS_START_COLOR: '#E9D3A8',
+            TAGS_END_COLOR: '#E9D3A8'
         },
 
         _searchElement: null,
@@ -34,6 +39,9 @@ define([
         _previousSearch: '',
 
         _queryChangedTimerId: null,
+
+        _filterTagsCount: 0,
+        _filterTags: {},
 
         /**
          *
@@ -49,10 +57,37 @@ define([
             // set up handler for text change
             this._searchElement.find('input').eq(0).keyup(this._handleSearchQueryChanged);
 
+            // set up handler for tag filters
+            this._getTagsElement().on('click', 'a', this._handleTagClick);
+
             $.fn.tagcloud.defaults = {
-                size: { start: 10, end: 18, unit: 'pt' },
-                color: { start: '#E9D3A8', end: '#E9D3A8' }
+                size: { start: this.$self().TAGS_START_SIZE, end: this.$self().TAGS_END_SIZE, unit: 'pt' },
+                color: { start: this.$self().TAGS_START_COLOR, end: this.$self().TAGS_END_COLOR }
             };
+        },
+
+        _handleTagClick: function (eventObject) {
+            var currentTarget = $(eventObject.currentTarget),
+                tagValue = currentTarget.html();
+
+            // if the tag was selected, then it will deselect
+            if (!currentTarget.hasClass('selected')) {
+                this._filterTagsCount = this._filterTagsCount + 1;
+
+                // select clicked tag
+                currentTarget.addClass('selected');
+                this._filterTags[tagValue] = 1;
+                console.log('added tag', tagValue);
+            } else {
+                // decrement select count
+                this._filterTagsCount = this._filterTagsCount - 1;
+
+                // deselect tag
+                currentTarget.removeClass('selected');
+                delete this._filterTags[tagValue];
+                console.log('removed tag', currentTarget.html());
+            }
+            console.log('current tags:', this._filterTags);
         },
 
 
@@ -82,7 +117,7 @@ define([
         },
 
         _getTagsElement: function () {
-            return $('.search-tags');
+            return this._element.find('.search-tags');
         },
 
         getQuerySearchValue: function () {
@@ -93,17 +128,23 @@ define([
             var total = tags.length,
                 i = 0,
                 tagsElement = this._getTagsElement(),
-                newElement;
+                newElement,
+                tagName,
+                filterTagsTtmp = this._filterTags,
+                fadeInTime = this.$self().TAGS_FADEIN_TIME;
 
-            tagsElement.fadeOut(100, function () {
+            tagsElement.fadeOut(this.$self().TAGS_FADEOUT_TIME, function () {
                 tagsElement.html('');
 
                 for (i = 0; i < total; i = i + 1) {
+                    tagName = tags[i].name;
+
                     tagsElement.append(doT.compile(tagTemplate)(
                         {
                             weight: tags[i].weight,
                             link: '#',
-                            name: tags[i].name
+                            name: tagName,
+                            selected: filterTagsTtmp.hasOwnProperty(tagName)
                         }
                     ));
                 }
@@ -112,7 +153,7 @@ define([
                     $('.search-tags a').tagcloud();
                 });
 
-                tagsElement.fadeIn(100);
+                tagsElement.fadeIn(fadeInTime);
             });
         },
 

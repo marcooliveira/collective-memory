@@ -17,6 +17,8 @@ define([
     var MemoryRepository = {
         $name: 'MemoryRepository',
 
+
+
         /**
          *
          */
@@ -57,7 +59,7 @@ define([
             result = [];
 
             for (i = 0; i < total; i = i + 1) {
-                if (Math.random() > 0.2) {
+                if (Math.random() > 0.4) {
                     result.push(tags[i]);
                 }
             }
