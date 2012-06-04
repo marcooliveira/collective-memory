@@ -57,11 +57,12 @@ define([
 
 
         _handleSearchQueryChanged: function (eventObject) {
+
             if (this._queryChangedTimerId !== null) {
                 clearTimeout(this._queryChangedTimerId);
             }
 
-            if (this._previousSearch !== eventObject.srcElement.value) {
+            if (this._previousSearch !== $(eventObject.target).val()) {
                 this._queryChangedTimerId = setTimeout(this._handleQueryChangedTimerTimeout, this.$self().QUERY_CHANGE_TIMEOUT);
             }
         },
