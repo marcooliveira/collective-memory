@@ -1,0 +1,22 @@
+{{ var length = it.contributions.length; }}
+{{ if (length > 0) { }}
+<ul>
+    {{ for (x = 0; x < length; x += 1) { }}
+    <li>
+        <div class="left-wrapper">
+            <div class="avatar"><img src="{{= it.contributions[x].author.avatar }}" alt =""/></div>
+        </div>
+        <div class="right-wrapper">
+            <div class="name">{{= it.contributions[x].author.name }}</div>
+            <div class="contribution-name">{{= it.contributions[x].name }}</div>
+            <div class="thumbnail"><img src="{{= it.contributions[x].image_small }}" alt="" /></div>
+
+            <div class="nr-comments">{{= it.contributions[x].nr_comments }} comments</div>
+            <div class="nr-likes">{{= it.contributions[x].like_counter }} likes</div>
+        </div>
+        <div class="clearfix"></div>
+    </li>
+    {{ } }}
+</ul>
+{{ } }}
+<div class="clearfix"></div>

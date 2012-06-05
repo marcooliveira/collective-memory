@@ -21,6 +21,8 @@ define([
         $extends: BaseController,
         $binds: [
             '_handleHideClick',
+            '_handleContributionsSuccess',
+            '_handleContributionsError',
             '_handleTopContributionsSuccess',
             '_handleTopContributionsError'
         ],
@@ -64,15 +66,23 @@ define([
          */
         setCurrentMemory: function (memoryId) {
             if (this._topContributionsRequest) {
-                this._topContributionsRequest.abort();
+                this._topContributionsRequest.destroy();
             }
-
+            if (this._contributionsRequest) {
+                this._contributionsRequest.destroy();
+            }
             this._view.setAsLoading();
 
             this._topContributionsRequest = this._contributionsRepository
-                .getTopContributions(memoryId)
+                .getTopContributions(memoryId, this._view.getNrTopContributions())
                 .addListener('fetch_success', this._handleTopContributionsSuccess)
                 .addListener('fetch_error', this._handleTopContributionsError)
+                .execute();
+
+            this._contributionsRequest = this._contributionsRepository
+                .getContributions(memoryId)
+                .addListener('fetch_success', this._handleContributionsSuccess)
+                .addListener('fetch_error', this._handleContributionsError)
                 .execute();
         },
 
@@ -103,9 +113,27 @@ define([
         /**
          *
          */
+        _handleContributionsSuccess: function (contributions, total) {
+            this._view.clearContributions();
+            this._view.setTotalContributions(total);
+            this._view.addContributions(contributions);
+            this._checkBothRequestsState();
+        },
+
+        /**
+         *
+         */
+        _handleContributionsError: function (error) {
+            console.log('error getting contributions', error);
+            this._checkBothRequestsState();
+        },
+
+        /**
+         *
+         */
         _checkBothRequestsState: function () {
-            if ((this._contributionsRequest == null || !this._contributionsRequest.isExecuting()) &&
-                (this._topContributionsRequest == null || !this._topContributionsRequest.isExecuting())) {
+            if ((!this._contributionsRequest || !this._contributionsRequest.isExecuting()) &&
+                (!this._topContributionsRequest || !this._topContributionsRequest.isExecuting())) {
                 this._view.unsetAsLoading();
             }
         },

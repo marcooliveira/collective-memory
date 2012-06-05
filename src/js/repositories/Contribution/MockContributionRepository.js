@@ -22,10 +22,14 @@ define([
         /**
          *
          */
-        getTopContributions: function(memoryId) {
-            return new ApiRequest('/data/contributions/contributions_' + memoryId + '.json')
+        getTopContributions: function(memoryId, $limit) {
+            return new ApiRequest('/data/contributions/top_contributions_' + memoryId + '.json')
                 .addListener('success', function (content) {
-                    this.fireEvent('fetch_success', content.contributions, content.total);
+                    var that = this;
+
+                    setTimeout(function () {
+                        that.fireEvent('fetch_success', $limit ? content.contributions.splice(0, $limit) : content.contributions, content.total);
+                    }, 400);
                 })
                 .addListener('error', function (error) {
                     this.fireEvent('fetch_error', error);
@@ -36,7 +40,14 @@ define([
          *
          */
         getContributions: function (memoryId, $offset, $limit, $fromId) {
-
+            // TODO: Handle offset, limit & fromId
+            return new ApiRequest('/data/contributions/contributions_' + memoryId + '.json')
+                .addListener('success', function (content) {
+                    this.fireEvent('fetch_success', content.contributions, content.total);
+                })
+                .addListener('error', function (error) {
+                    this.fireEvent('fetch_error', error);
+                });
         }
     };
 

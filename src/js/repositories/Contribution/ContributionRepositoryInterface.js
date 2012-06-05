@@ -16,7 +16,7 @@ define(['classify/Interface'], function (Interface) {
         /**
          *
          */
-        getTopContributions: function(memoryId) {},
+        getTopContributions: function(memoryId, $limit) {},
 
         /**
          *

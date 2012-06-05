@@ -93,6 +93,7 @@ define([
 
             return this;
         },
+
         /**
          * Cancels the request if is executing.
          *
@@ -186,6 +187,14 @@ define([
          */
         fireEvent: function (event, args) {
             return this._fireEvent.apply(this, arguments);
+        },
+
+        /**
+         * Destroys the instance.
+         */
+        destroy: function () {
+            this.abort();
+            this.removeListeners();
         },
 
         // protected methods
